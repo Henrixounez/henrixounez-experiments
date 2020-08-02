@@ -1,7 +1,9 @@
-import Head from 'next/head'
-import '../styles/base.css'
+import Head from 'next/head';
+import Router from 'next/router';
+import withGA from 'next-ga';
+import '../styles/base.css';
 
-export default function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
@@ -11,3 +13,5 @@ export default function MyApp({ Component, pageProps }) {
     </>
   )
 }
+
+export default withGA('UA-174263363-1', Router)(MyApp);
