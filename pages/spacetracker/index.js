@@ -1,21 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { css } from '@emotion/css'
 import tw from '@tailwindcssinjs/macro'
-import Router, { useRouter } from "next/router"
 
 import Layout from '../../components/layout'
 import Date from '../../components/date'
 import { useSWRInfinite } from 'swr'
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 12;
 
 const fetcher = url => fetch(url).then(r => r.json())
 
 const SpaceList = () => {
   const { data, error, size, setSize } = useSWRInfinite((index, previousData) => {
-    if (!!previousData && index * 10 > previousData.count)
+    if (!!previousData && index * PAGE_SIZE > previousData.count)
       return null;
-    return `https://ll.thespacedevs.com/2.0.0/launch/upcoming/?limit=${PAGE_SIZE}&offset=${index * 10}`;
+    return `https://ll${process.env.NODE_ENV === 'development' ? 'dev' : ''}.thespacedevs.com/2.0.0/launch/upcoming/?limit=${PAGE_SIZE}&offset=${index * PAGE_SIZE}`;
   }, fetcher)
   const isLoadingInitialData = !data && !error;
   const isLoadingMore = isLoadingInitialData || (size > 0 && data && typeof data[size - 1] === "undefined");
