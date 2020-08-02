@@ -42,7 +42,7 @@ const SpaceList = () => {
 
   const launchData = !data ? [] : data.reduce((acc, e) => {acc.push(...e.results); return acc}, [])
   return (
-    <div className={css(tw`py-10 lg:py-20`)}>
+    <div>
       <div className={"launch-list " + css(tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl`)}>
         {launchData.flat().map((launch, i) => (
           <div key={i} className={"launch " + css(tw`rounded-lg overflow-hidden`, `min-height: 50vh; max-height: 50vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`)}>

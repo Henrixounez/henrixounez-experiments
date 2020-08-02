@@ -8,10 +8,11 @@ const BigTitle = ({children, height='0'}) => (
       css(
         tw`flex items-center justify-center`,
         `
-        min-height: 60vh;
-        ${mq[1]} {
-          min-height: 70vh;
-        }        `
+          min-height: 60vh;
+          ${mq[1]} {
+            min-height: 70vh;
+          }
+        `
       )
     }
   >

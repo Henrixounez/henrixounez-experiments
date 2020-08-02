@@ -3,7 +3,7 @@ import { css } from "@emotion/css";
 import tw from '@tailwindcssinjs/macro';
 
 const Drawer = ({isOpen, links}) => (
-  <div className={css(tw`fixed bg-white duration-1000 w-full pt-16 overflow-hidden`, `${isOpen ? 'height: 100vh;' : 'height: 0vh;'}`)}>
+  <div className={css(tw`fixed bg-white duration-1000 w-full pt-16 overflow-hidden z-10`, `${isOpen ? 'height: 100vh;' : 'transform: translateY(-100px); height: 0vh;'}`)}>
     <div className={css(tw`duration-1000 flex flex-col items-center`, `${isOpen ? 'opacity: 1;' : 'opacity: 0;'}`)}>
       {
         links.map((e, i) => (

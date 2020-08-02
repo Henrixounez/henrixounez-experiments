@@ -10,7 +10,7 @@ const Layout = ({children, title, showPage}) => (
       <meta name="Description" content={title}/>
     </Head>
     <Header title={title} showPage={showPage}/>
-    <main className={css(tw`flex flex-col justify-center items-center`)}>
+    <main className={css(tw`py-20 flex flex-col justify-center items-center`)}>
       {children}
     </main>
   </div>
