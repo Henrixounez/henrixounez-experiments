@@ -3,13 +3,13 @@ import { css } from '@emotion/css'
 import tw from '@tailwindcssinjs/macro'
 import Header from './header';
 
-const Layout = ({children, title, currentPage, description}) => (
+const Layout = ({children, title, showPage}) => (
   <div>
     <Head>
       <title>{title} | Henrixounez</title>
-      <meta name="Description" content={description}/>
+      <meta name="Description" content={title}/>
     </Head>
-    <Header currentPage={currentPage}/>
+    <Header title={title} showPage={showPage}/>
     <main className={css(tw`flex flex-col justify-center items-center`)}>
       {children}
     </main>

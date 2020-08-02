@@ -72,7 +72,7 @@ const SpaceList = () => {
 };
 
 const SpaceTracker = ({data}) => (
-  <Layout title='Space Tracker' currentPage='Space Tracker' description='Space events calendar'>
+  <Layout title='Space Tracker' showPage description='Space events calendar'>
     <SpaceList data={data}/>
   </Layout>
 );

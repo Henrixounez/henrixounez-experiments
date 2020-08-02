@@ -25,7 +25,7 @@ const Index = () => (
             </h1>
             <div className={css(tw`flex flex-col items-start`)}>
               <Link href={page.link}>
-                <a className={css(tw`text-3xl font-medium`)}>
+                <a className={css(tw`text-3xl font-medium hover:font-bold duration-200`)}>
                   {page.name}
                 </a>
               </Link>
