@@ -23,7 +23,7 @@ export default class MyDocument extends Document {
             data-emotion-css={this.props.ids.join(' ')}
             dangerouslySetInnerHTML={{ __html: this.props.css }}
           />
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link rel="stylesheet" rel="preload" as="style" href="https://rsms.me/inter/inter.css" />
         </Head>
         <body>
           <Main />
