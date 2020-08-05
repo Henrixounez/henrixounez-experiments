@@ -34,4 +34,5 @@ module.exports = {
   },
   variants: {},
   plugins: [require('@tailwindcss/ui')],
+  purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
 }
