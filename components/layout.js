@@ -11,7 +11,7 @@ const Layout = ({children, title, showPage}) => (
       <meta name="google-site-verification" content="Xe9o0Xjf5IsRK8YWvMyPyo8PdvqRNXTCJXHy1A9obPM" />
     </Head>
     <Header title={title} showPage={showPage}/>
-    <main className={css(tw`py-20 flex flex-col justify-center items-center`)}>
+    <main className={css(tw`py-20 flex flex-col justify-center items-center max-w-full`)}>
       {children}
     </main>
   </div>

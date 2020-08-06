@@ -42,7 +42,7 @@ const About = () => {
             <img className={css(tw`h-10 pl-5 hover:h-11 duration-200`)} src='/github-icon.svg' alt='github-icon'/>
           </a>
         </div>
-        <div className={css(tw`overflow-hidden pt-5`, `width: 99vw; max-width: 1920px;`)}>
+        <div className={css(tw`overflow-hidden pt-5 max-w-full`)}>
           { texts.map((chunk, i) => (
             <div key={i} className={css(tw`flex flex-row`)}>
               <div className={css(tw`flex flex-row`, `animation: ${textAnimation} ${animationSpeeds[i]}s linear infinite`)}>
@@ -62,7 +62,7 @@ const About = () => {
             </div>
           ))}
         </div>
-        <div className={css(tw`flex flex-col items-center pt-16`)}>
+        <div className={css(tw`flex flex-col items-center pt-16 max-w-full`)}>
           <h1 className={css(tw`text-3xl md:text-5xl font-black`)}>
             Credits
           </h1>

@@ -14,4 +14,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default withGA('UA-174263363-1', Router)(MyApp);
+export default (process.env.NODE_ENV === 'development') ? MyApp : withGA('UA-174263363-1', Router)(MyApp);
