@@ -1,7 +1,6 @@
 import { css, keyframes } from '@emotion/css'
 import tw from '@tailwindcssinjs/macro'
 import Layout from '../../components/layout';
-import { useEffect, useState } from 'react';
 import LinkList from '../../components/linklist';
 
 const texts = [
