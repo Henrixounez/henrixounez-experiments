@@ -114,8 +114,8 @@ const LaunchBox = ({launch, i}) => {
           </div>
         </div>
         <div className={css(tw`absolute rounded-lg bg-white duration-1000 overflow-auto`, `height: ${moreInfo ? '50vh' : '0vh'}; max-height: 50vh; top: ${moreInfo ? '0%' : '100%'}`)}>
-          <div className={css(tw`flex flex-col`, `padding: 0.5rem;`)}>
-            <img className={css(tw`cursor-pointer`, `margin-top: 5px; height: 20px; width: 20px; transition: 1000ms; transform: rotateX(180deg); align-self: center; filter: invert(1);`)} onClick={() => setMoreInfo(!moreInfo)} src={'/chevron.svg'} alt='more-infos'/>
+          <div className={css(tw`flex flex-col`, `padding: 1rem;`)}>
+            <img className={css(tw`cursor-pointer`, `height: 20px; width: 20px; transition: 1000ms; transform: rotateX(180deg); align-self: center; filter: invert(1);`)} onClick={() => setMoreInfo(!moreInfo)} src={'/chevron.svg'} alt='more-infos'/>
             <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
               🛰️ <h2 className={css(tw`font-bold inline`)}>{launch?.['mission']?.name}</h2> : {launch?.['mission']?.description}
             </h2>
