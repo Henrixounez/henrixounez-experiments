@@ -51,25 +51,34 @@ const HeaderLaunch = ({launch}) => {
   const [moreInfo, setMoreInfo] = useState(false);
 
   return (
-    <div className={css(tw`cursor-pointer mb-8 flex flex-row rounded-lg overflow-hidden max-w-7xl`, `min-height: 80vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`)}>
-      <img className={css(tw`absolute object-cover w-full max-w-7xl rounded-lg`, 'height: 80vh; filter: brightness(70%)')} src={launch.image || '/empty-img.jpg'} alt='launch-image'/>
-      <div className={css(tw`w-full flex flex-col`, 'z-index: 1')}>
-        <div className={css(tw`flex flex-col justify-between p-5 pb-0 w-full max-w-7xl flex flex-col items-center text-white duration-1000`, `height: ${moreInfo ? '70%' : '100%'}; min-height: max-content`)}>
-          <h1 className={css(tw`font-bold text-2xl md:text-5xl text-center`)}>
+    <div className={css(tw`relative mb-8 rounded-lg overflow-hidden max-w-7xl`, `min-height: 80vh; max-height: 80vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`)}>
+      <img className={css(tw`object-cover`, `height: 80vh; width: 100%; filter: brightness(80%);`)} src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
+      <div className={css(tw`absolute`, `top: 0; left: 0; right: 0; bottom: 0;`)}>
+        <div className={css(tw`flex flex-col justify-between font-bold text-center text-white p-5 h-full w-full pb-1`)}>
+          <h1 className={css(tw`font-bold text-2xl md:text-5xl`)}>
             {launch.name}
           </h1>
           <div className={css(tw`flex flex-col items-center`)}>
             <h1 className={css(tw`font-bold text-xl md:text-4xl`)}>
               <Countdown timeString={launch.window_start || launch.window_end || launch.net}/><br/>
             </h1>
-            <h2 className={css(tw`font-medium text-xl md:text-3xl`)}>
-              <DatePrinter dateString={launch.window_start || launch.window_end || launch.net} precise/>
+            <h2 className={css(tw`font-bold text-xl md:text-4xl`)}>
+              <DatePrinter dateString={launch.window_start || launch.window_end || launch.net} day precise/>
             </h2>
-            <img className={css(`margin-top: 10px; height: 30px; width: 30px; transition: 1000ms; transform: rotateX(${moreInfo ? '180' : '0'}deg); `)} onClick={() => setMoreInfo(!moreInfo)} src={'/chevron.svg'} alt='more-infos'/>
+            <img className={css(tw`cursor-pointer`, `margin-top: 10px; height: 30px; width: 30px; transition: 1000ms;`)} onClick={() => setMoreInfo(!moreInfo)} src={'/chevron.svg'} alt='more-infos'/>
           </div>
         </div>
-        <div className={css(tw`bg-white duration-1000 overflow-hidden`, `height: ${moreInfo ? '100%' : '0vh'};`)}>
-          <div className={css(tw`flex flex-col`, `padding: 0.5rem;`)}>
+        <div className={css(tw`absolute rounded-lg bg-white duration-1000 overflow-auto w-full`, `height: ${moreInfo ? '80vh' : '0vh'}; max-height: 80vh; top: ${moreInfo ? '0%' : '100%'}`)}>
+          <div className={css(tw`flex flex-col`, `padding: 1rem;`)}>
+            <div className={css(tw`flex flex-col items-center`)}>
+              <img className={css(tw`cursor-pointer`, `margin-top: 10px; margin-bottom: 10px; height: 30px; width: 30px; transition: 1000ms; transform: rotateX(180deg); align-self: center; filter: invert(1);`)} onClick={() => setMoreInfo(!moreInfo)} src={'/chevron.svg'} alt='more-infos'/>
+              <h1 className={css(tw`font-bold text-xl md:text-4xl`)}>
+                <Countdown timeString={launch.window_start || launch.window_end || launch.net}/><br/>
+              </h1>
+              <h2 className={css(tw`font-bold text-xl md:text-4xl`)}>
+                <DatePrinter dateString={launch.window_start || launch.window_end || launch.net} day precise/>
+              </h2>
+            </div>
             <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
               🛰️ <h2 className={css(tw`font-bold inline`)}>{launch?.['mission']?.name}</h2> : {launch?.['mission']?.description}
             </h2>
@@ -83,7 +92,44 @@ const HeaderLaunch = ({launch}) => {
         </div>
       </div>
     </div>
-  )
+  );
+}
+
+const LaunchBox = ({launch, i}) => {
+  const [moreInfo, setMoreInfo] = useState(false);
+
+  return (
+    <div key={i} className={"launch " + css(tw`relative rounded-lg overflow-hidden`, `min-height: 50vh; max-height: 50vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`)}>
+      <img className={css(tw`object-cover`, `height: 50vh; width: 100%; filter: brightness(80%);`)} src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
+      <div className={css(tw`absolute`, `top: 0; left: 0; right: 0; bottom: 0;`)}>
+        <div className={css(tw`flex flex-col justify-between font-bold text-center text-white p-5 h-full w-full pb-1`)}>
+          <h1>
+            {launch.name}
+          </h1>
+          <div className={css(tw`flex flex-col items-center`)}>
+            <h2>
+              <DatePrinter dateString={launch.window_start || launch.window_end || launch.net} day precise/>
+            </h2>
+            <img className={css(tw`cursor-pointer`, `margin-top: 5px; height: 20px; width: 20px; transition: 1000ms;`)} onClick={() => setMoreInfo(!moreInfo)} src={'/chevron.svg'} alt='more-infos'/>
+          </div>
+        </div>
+        <div className={css(tw`absolute rounded-lg bg-white duration-1000 overflow-auto`, `height: ${moreInfo ? '50vh' : '0vh'}; max-height: 50vh; top: ${moreInfo ? '0%' : '100%'}`)}>
+          <div className={css(tw`flex flex-col`, `padding: 0.5rem;`)}>
+            <img className={css(tw`cursor-pointer`, `margin-top: 5px; height: 20px; width: 20px; transition: 1000ms; transform: rotateX(180deg); align-self: center; filter: invert(1);`)} onClick={() => setMoreInfo(!moreInfo)} src={'/chevron.svg'} alt='more-infos'/>
+            <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
+              🛰️ <h2 className={css(tw`font-bold inline`)}>{launch?.['mission']?.name}</h2> : {launch?.['mission']?.description}
+            </h2>
+            <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
+              🚀 <h2 className={css(tw`font-bold inline`)}>{launch?.rocket?.configuration?.name}</h2> | {launch?.['launch_service_provider']?.name}
+            </h2>
+            <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
+              🌎 <h2 className={css(tw`font-bold inline`)}>{launch?.pad?.name}</h2> | {launch?.pad?.location?.name}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 const SpaceList = () => {
@@ -124,20 +170,7 @@ const SpaceList = () => {
       )}
       <div className={"launch-list " + css(tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl`)}>
         {launchData.splice(1).map((launch, i) => (
-          <div key={i} className={"launch " + css(tw`rounded-lg overflow-hidden`, `min-height: 50vh; max-height: 50vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`)}>
-            <div className={css(tw`m-5`, 'min-height: 10vh')}>
-              <h1 className={css(tw`font-bold`)}>
-                {launch.name}
-              </h1>
-              <h2>
-                <DatePrinter dateString={launch.window_start || launch.window_end || launch.net} day precise/><br/>
-              </h2>
-              <h3 className={css(tw`font-thin`)}>
-                {launch.location}
-              </h3>
-            </div>
-            <img className={css(tw`object-cover`, `height: 40vh; width: 100%`)} src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
-          </div>
+          <LaunchBox launch={launch} i={i}/>
         ))}
       </div>
       {isLoadingMore && (
