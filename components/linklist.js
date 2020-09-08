@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { css } from '@emotion/css'
 import tw from '@tailwindcssinjs/macro'
+import boldTransitionBefore from './boldtexttransition';
 
 const LinkList = ({list}) => (
   <div className={css(tw`container max-w-full`, `width: 1280px;`)}>
@@ -13,12 +14,12 @@ const LinkList = ({list}) => (
           <div className={css(tw`flex flex-col items-start`)}>
             {link.intra ? (
               <Link href={link.link}>
-                <a className={css(tw`text-3xl font-medium hover:font-bold duration-200`)}>
+                <a className={css(tw`text-3xl font-medium hover:font-bold duration-200`, boldTransitionBefore(link.name, "700"))}>
                   {link.name}
                 </a>
               </Link>
             ) : (
-              <a href={link.link} className={css(tw`text-3xl font-medium hover:font-bold duration-200`)}>
+              <a href={link.link} className={css(tw`text-3xl font-medium hover:font-bold duration-200`, boldTransitionBefore(link.name, "700"))}>
                 {link.name}
               </a>
             )}

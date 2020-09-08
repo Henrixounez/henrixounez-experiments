@@ -4,6 +4,7 @@ import { css } from '@emotion/css';
 import tw from '@tailwindcssinjs/macro';
 import Drawer from './drawer';
 import Burger from './burger';
+import boldTransitionBefore from './boldtexttransition';
 
 const links = [
   {link: '/about', name: 'About'},
@@ -55,7 +56,7 @@ export default function Header({title, showPage}) {
         <div className={css(tw`max-w-full flex flex-row justify-between items-center`, `width: 1280px`)}>
           <div>
             <Link href='/'>
-              <a className={css(tw`text-xl hover:font-semibold duration-200`, showPage ? tw`font-normal` : tw`font-thin`)}>
+              <a className={css(tw`text-xl hover:font-semibold duration-200`, showPage ? tw`font-normal` : tw`font-thin`, boldTransitionBefore("Henrixounez", "600"))}>
                 Henrixounez
               </a>
             </Link>
@@ -72,7 +73,7 @@ export default function Header({title, showPage}) {
                 {
                   links.map((e, i) => (
                     <Link key={i} href={e.link}>
-                      <a className={css(tw`text-xl font-semibold hover:font-bold duration-200 px-2`)}>
+                      <a className={css(tw`text-xl font-semibold hover:font-bold duration-200 px-2`, boldTransitionBefore(e.name, "700"))}>
                         {e.name}
                       </a>
                     </Link>
