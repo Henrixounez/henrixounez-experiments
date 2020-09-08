@@ -3,7 +3,8 @@ import BigTitle from '../components/bigtitle'
 import LinkList from '../components/linklist'
 
 const pages = [
-  {link: '/spacetracker', intra: true, name: 'Space Tracker', description: 'Space events calendar', icon: '🚀'}
+  {link: '/spacetracker', intra: true, name: 'Space Tracker', description: 'Space events calendar', icon: '🚀'},
+  {link: '/geometry', intra: true, name: 'Geometry', description: 'Geometry visualisations', icon: '📐'}
 ]
 
 const Index = () => (
