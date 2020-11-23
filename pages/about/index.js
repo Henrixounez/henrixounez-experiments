@@ -46,14 +46,14 @@ const About = () => {
             <div key={i} className={css(tw`flex flex-row`)}>
               <div className={css(tw`flex flex-row`, `animation: ${textAnimation} ${animationSpeeds[i]}s linear infinite`)}>
                 {chunk.map((e, i2) => (
-                  <h2 key={i2} className={css(tw`text-5xl md:text-5rem px-5 md:px-20 whitespace-no-wrap`, `font-weight: ${e.weight}`)}>
+                  <h2 key={i2} className={css(tw`text-5xl md:text-5rem px-5 md:px-20 whitespace-nowrap`, `font-weight: ${e.weight}`)}>
                     {e.name}
                   </h2>
                 ))}
               </div>
               <div className={css(tw`flex flex-row`, `animation: ${textAnimation} ${animationSpeeds[i]}s linear infinite;transition-delay: ${animationSpeeds[i] / 2}s`)}>
                 {chunk.map((e, i2) => (
-                  <h2 key={i2} className={css(tw`text-5xl md:text-5rem px-5 md:px-20 whitespace-no-wrap`, `font-weight: ${e.weight}`)}>
+                  <h2 key={i2} className={css(tw`text-5xl md:text-5rem px-5 md:px-20 whitespace-nowrap`, `font-weight: ${e.weight}`)}>
                     {e.name}
                   </h2>
                 ))}
