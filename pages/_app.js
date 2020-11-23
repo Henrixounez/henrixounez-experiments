@@ -1,6 +1,4 @@
 import Head from 'next/head';
-import Router from 'next/router';
-import withGA from 'next-ga';
 import '../styles/base.css';
 
 function MyApp({ Component, pageProps }) {
@@ -14,4 +12,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default (process.env.NODE_ENV === 'development') ? MyApp : withGA('UA-174263363-1', Router)(MyApp);
+export default MyApp;
