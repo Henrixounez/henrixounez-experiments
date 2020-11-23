@@ -104,3 +104,5 @@ export {
     ControlEmpty,
     ControlPad,
 };
+
+export default ControlPad;
