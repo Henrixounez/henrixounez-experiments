@@ -1,6 +1,7 @@
+import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
-import { css } from '@emotion/css'
-import tw from '@tailwindcssinjs/macro'
+import xw from 'xwind';
+
 import { ControlLine, ControlEmpty, ControlPad, createAutoMove } from './geometrycontrols';
 
 const Hypocycloid = () => {
@@ -70,12 +71,12 @@ const Hypocycloid = () => {
     }, [runK, runTheta, zoom, piLimit, dX, dY]);
 
     return (
-        <div className={css(tw`flex flex-col items-center mb-10`)}>
-            <h1 className={css(tw`text-xl font-bold mb-5`)}>
+        <div css={xw`flex flex-col items-center mb-10`}>
+            <h1 css={xw`text-xl font-bold mb-5`}>
                 Hypocycloid
             </h1>
             <canvas ref={canvasRef} width={`${width}px`} height={`${height}px`} style={{width: `min(100vw, ${width}px)`, height: `min(100vw, ${width}px)`}} />
-            <div className={css(tw`grid grid-cols-7`)}>
+            <div css={xw`grid grid-cols-7`}>
 
                 <ControlLine name="k" value={k} valueChange={[-0.5, -0.1, 0.1, 0.5]} lowLimit={1} valueFn={setk} fixedValue={3} autoMove={true} autoMoveValue={runK} autoMoveFn={setRunK} />
                 <ControlLine name="k" value={k} showValue={false} valueChange={[-0.01, -0.001, 0.001, 0.01]} lowLimit={1} valueFn={setk} />
@@ -94,13 +95,13 @@ const Hypocycloid = () => {
                 <ControlPad xFunction={setDX} yFunction={setDY} zoomFunction={setZoom} />
 
             </div>
-            <div className={css(tw`mt-5`, `max-width: 90%;`)}>
-                <h2 className={css(tw`text-lg font-bold`)}>
+            <div css={[xw`mt-5`, css`max-width: 90%;`]}>
+                <h2 css={xw`text-lg font-bold`}>
                     Explanation:
                 </h2>
                 <h3>
                     The coordinates of the points are calculated thanks to these formulae :
-                    <ul className={css(tw`my-4`)}>
+                    <ul css={xw`my-4`}>
                         <li>x(θ) = (R - r) * cos(θ) + r * cos(((R - r) / r) * θ)</li>
                         <li>y(θ) = (R - r) * sin(θ) - r * sin(((R - r) / r) * θ)</li>
                     </ul>

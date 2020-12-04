@@ -1,11 +1,10 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 module.exports = {
+  darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-      },
+      colors,
     },
     fontSize: {
       'xs': '.75rem',
@@ -33,6 +32,9 @@ module.exports = {
     }
   },
   variants: {},
-  plugins: [require('@tailwindcss/ui')],
-  purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
+  plugins: [],
+  // purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
+  xwind: {
+    mode: 'objectstyles',
+  },
 }

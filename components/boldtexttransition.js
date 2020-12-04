@@ -1,5 +1,7 @@
+import { css } from "@emotion/react";
+
 export default function boldTransitionBefore(name, boldness) {
-    return (`
+    return (css`
         text-align: center;
         display: inline-block;
         &:before {

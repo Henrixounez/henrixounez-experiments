@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { css } from '@emotion/css';
-import tw from '@tailwindcssinjs/macro';
+import xw, { cx } from 'xwind';
 import Drawer from './drawer';
 import Burger from './burger';
 import boldTransitionBefore from './boldtexttransition';
+import { css } from '@emotion/react';
 
 const links = [
   {link: '/about', name: 'About'},
@@ -40,40 +40,38 @@ export default function Header({title, showPage}) {
     <>
       <Drawer links={links} isOpen={drawerOpen}/>
       <div
-        className={
-          css(
-            tw`p-2 fixed bg-white w-full duration-500 flex flex-row justify-center items-center z-10`,
-            `
-              ${drawerOpen || showHeader ? 
-                // 'box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);' :
-                '' :
-                'transform: translateY(-5rem);'
-              }
-            `
-          )
-        }
+        css={[
+          xw`p-2 fixed bg-white w-full duration-500 flex flex-row justify-center items-center z-10`,
+          css`
+            ${drawerOpen || showHeader ? 
+              // 'box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);' :
+              '' :
+              'transform: translateY(-5rem);'
+            }
+          `
+        ]}
       >
-        <div className={css(tw`max-w-full flex flex-row justify-between items-center`, `width: 1280px`)}>
+        <div css={[xw`max-w-full flex flex-row justify-between items-center`, css`width: 1280px`]}>
           <div>
             <Link href='/'>
-              <a className={css(tw`text-xl hover:font-semibold duration-200`, showPage ? tw`font-normal` : tw`font-thin`, boldTransitionBefore("Henrixounez", "600"))}>
+              <a css={[xw`cursor-pointer text-xl hover:font-semibold duration-200`, showPage ? xw`font-normal` : xw`font-thin`, boldTransitionBefore("Henrixounez", "600")]}>
                 Henrixounez
               </a>
             </Link>
             {showPage && (
-              <span className={css(tw`text-xl font-thin`)}>
+              <span css={xw`text-xl font-thin`}>
                 &nbsp;| {title}
               </span>
             )}
           </div>
-          <div className={css(tw`flex flex-row items-center justify-center`)}>
+          <div css={xw`flex flex-row items-center justify-center`}>
             <Burger open={drawerOpen} setOpen={setDrawerOpen}/>
             {!drawerOpen && (
-              <div className={css(tw`hidden md:block`)}>
+              <div css={xw`hidden md:block`}>
                 {
                   links.map((e, i) => (
                     <Link key={i} href={e.link}>
-                      <a className={css(tw`text-xl font-semibold hover:font-bold duration-200 px-2`, boldTransitionBefore(e.name, "700"))}>
+                      <a css={[xw`cursor-pointer text-xl font-semibold hover:font-bold duration-200 px-2`, boldTransitionBefore(e.name, "700")]}>
                         {e.name}
                       </a>
                     </Link>

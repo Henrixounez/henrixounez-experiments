@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { css, keyframes } from '@emotion/css'
-import tw from '@tailwindcssinjs/macro'
+import { useEffect, useState } from 'react';
+import { css, keyframes } from '@emotion/react';
+import xw from 'xwind';
 
 import Layout from '../../components/layout'
 import DatePrinter from '../../components/date'
@@ -11,8 +11,20 @@ const PAGE_SIZE = 12;
 const fetcher = url => fetch(url).then(r => r.json())
 
 const Chevron = ({onClick, inverted=false, small=false, color="#FFFFFF", style=""}) => (
-  <div className={css(tw`cursor-pointer flex items-center justify-center`, `height: 25px; width: 25px;`, style)}>
-    <div className={css(`height: ${small ? 10 : 20}px; width: ${small ? 10 : 20}px; transition: 200ms; transform: rotate(${inverted ? "225deg" : "45deg"}); border: 2px solid ${color}; box-sizing: content-box; border-width: 2px 0 0 2px; &:hover { border-width: ${small ? 3 : 4}px 0 0 ${small ? 3 : 4}px; }`)} onClick={onClick} />
+  <div css={[xw`cursor-pointer flex items-center justify-center`, css`height: 25px; width: 25px;`, style]}>
+    <div css={css`
+      height: ${small ? 10 : 20}px;
+      width: ${small ? 10 : 20}px;
+      transition: 200ms; transform:
+      rotate(${inverted ? "225deg" : "45deg"});
+      border: 2px solid ${color};
+      box-sizing: content-box;
+      border-width: 2px 0 0 2px;
+      &:hover {
+        border-width: ${small ? 3 : 4}px 0 0 ${small ? 3 : 4}px;
+      }`}
+      onClick={onClick}
+    />
   </div>
 );
 
@@ -57,42 +69,42 @@ const HeaderLaunch = ({launch}) => {
   const [moreInfo, setMoreInfo] = useState(false);
 
   return (
-    <div className={css(tw`relative mb-8 rounded-lg overflow-hidden max-w-7xl`, `min-height: 80vh; max-height: 80vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`)}>
-      <img className={css(tw`object-cover`, `height: 80vh; width: 100%; filter: brightness(80%);`)} src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
-      <div className={css(tw`absolute`, `top: 0; left: 0; right: 0; bottom: 0;`)}>
-        <div className={css(tw`flex flex-col justify-between font-bold text-center text-white p-5 h-full w-full pb-1`)}>
-          <h1 className={css(tw`font-bold text-2xl md:text-5xl`)}>
+    <div css={[xw`relative mb-8 rounded-lg overflow-hidden max-w-7xl`, css`min-height: 80vh; max-height: 80vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`]}>
+      <img css={[xw`object-cover`, css`height: 80vh; width: 100%; filter: brightness(80%);`]} src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
+      <div css={[xw`absolute`, css`top: 0; left: 0; right: 0; bottom: 0;`]}>
+        <div css={xw`flex flex-col justify-between font-bold text-center text-white p-5 h-full w-full pb-1`}>
+          <h1 css={xw`font-bold text-2xl md:text-5xl`}>
             {launch.name}
           </h1>
-          <div className={css(tw`flex flex-col items-center`)}>
-            <h1 className={css(tw`font-bold text-xl md:text-4xl`)}>
+          <div css={xw`flex flex-col items-center`}>
+            <h1 css={xw`font-bold text-xl md:text-4xl`}>
               <Countdown timeString={launch.window_start || launch.window_end || launch.net}/><br/>
             </h1>
-            <h2 className={css(tw`font-bold text-xl md:text-4xl`)}>
+            <h2 css={xw`font-bold text-xl md:text-4xl`}>
               <DatePrinter dateString={launch.window_start || launch.window_end || launch.net} day precise/>
             </h2>
             <Chevron onClick={() => setMoreInfo(!moreInfo)} style="margin-top: 10px;"/>
           </div>
         </div>
-        <div className={css(tw`absolute rounded-lg bg-white duration-1000 overflow-auto w-full`, `height: ${moreInfo ? '80vh' : '0vh'}; max-height: 80vh; top: ${moreInfo ? '0%' : '100%'}`)}>
-          <div className={css(tw`flex flex-col`, `padding: 1rem;`)}>
-            <div className={css(tw`flex flex-col items-center`)}>
+        <div css={[xw`absolute rounded-lg bg-white duration-1000 overflow-auto w-full`, css`height: ${moreInfo ? '80vh' : '0vh'}; max-height: 80vh; top: ${moreInfo ? '0%' : '100%'}`]}>
+          <div css={xw`flex flex-col`, css`padding: 1rem;`}>
+            <div css={xw`flex flex-col items-center`}>
               <Chevron onClick={() => setMoreInfo(!moreInfo)} inverted={true} color="#000000" style="margin-top: 10px; margin-bottom: 10px"/>
-              <h1 className={css(tw`font-bold text-xl md:text-4xl`)}>
+              <h1 css={xw`font-bold text-xl md:text-4xl`}>
                 <Countdown timeString={launch.window_start || launch.window_end || launch.net}/><br/>
               </h1>
-              <h2 className={css(tw`font-bold text-xl md:text-4xl`)}>
+              <h2 css={xw`font-bold text-xl md:text-4xl`}>
                 <DatePrinter dateString={launch.window_start || launch.window_end || launch.net} day precise/>
               </h2>
             </div>
-            <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
-              🛰️ <a className={css(tw`font-bold inline`)}>{launch?.['mission']?.name}</a> : {launch?.['mission']?.description}
+            <h2 css={xw`text-xl md:text-2xl my-2`}>
+              🛰️ <a css={xw`font-bold inline`}>{launch?.['mission']?.name}</a> : {launch?.['mission']?.description}
             </h2>
-            <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
-              🚀 <a className={css(tw`font-bold inline`)}>{launch?.rocket?.configuration?.name}</a> | {launch?.['launch_service_provider']?.name}
+            <h2 css={xw`text-xl md:text-2xl my-2`}>
+              🚀 <a css={xw`font-bold inline`}>{launch?.rocket?.configuration?.name}</a> | {launch?.['launch_service_provider']?.name}
             </h2>
-            <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
-              🌎 <a className={css(tw`font-bold inline`)}>{launch?.pad?.name}</a> | {launch?.pad?.location?.name}
+            <h2 css={xw`text-xl md:text-2xl my-2`}>
+              🌎 <a css={xw`font-bold inline`}>{launch?.pad?.name}</a> | {launch?.pad?.location?.name}
             </h2>
           </div>
         </div>
@@ -105,31 +117,31 @@ const LaunchBox = ({launch}) => {
   const [moreInfo, setMoreInfo] = useState(false);
 
   return (
-    <div className={"launch " + css(tw`relative rounded-lg overflow-hidden`, `min-height: 50vh; max-height: 50vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`)}>
-      <img className={css(tw`object-cover`, `height: 50vh; width: 100%; filter: brightness(80%);`)} src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
-      <div className={css(tw`absolute`, `top: 0; left: 0; right: 0; bottom: 0;`)}>
-        <div className={css(tw`flex flex-col justify-between font-bold text-center text-white p-5 h-full w-full pb-1`)}>
+    <div className={"launch"} css={[xw`relative rounded-lg overflow-hidden`, css`min-height: 50vh; max-height: 50vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`]}>
+      <img css={[xw`object-cover`, css`height: 50vh; width: 100%; filter: brightness(80%);`]} src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
+      <div css={[xw`absolute`, css`top: 0; left: 0; right: 0; bottom: 0;`]}>
+        <div css={xw`flex flex-col justify-between font-bold text-center text-white p-5 h-full w-full pb-1`}>
           <h1>
             {launch.name}
           </h1>
-          <div className={css(tw`flex flex-col items-center`)}>
+          <div css={xw`flex flex-col items-center`}>
             <h2>
               <DatePrinter dateString={launch.window_start || launch.window_end || launch.net} day precise/>
             </h2>
             <Chevron onClick={() => setMoreInfo(!moreInfo)} small={true} style="margin-top: 5px;"/>
           </div>
         </div>
-        <div className={css(tw`absolute rounded-lg bg-white duration-1000 overflow-auto`, `height: ${moreInfo ? '50vh' : '0vh'}; max-height: 50vh; top: ${moreInfo ? '0%' : '100%'}`)}>
-          <div className={css(tw`flex flex-col`, `padding: 1rem;`)}>
+        <div css={[xw`absolute rounded-lg bg-white duration-1000 overflow-auto`, css`height: ${moreInfo ? '50vh' : '0vh'}; max-height: 50vh; top: ${moreInfo ? '0%' : '100%'}`]}>
+          <div css={[xw`flex flex-col`, css`padding: 1rem;`]}>
             <Chevron onClick={() => setMoreInfo(!moreInfo)} inverted={true} small={true} color="#000000" style="align-self: center;"/>
-            <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
-              🛰️ <a className={css(tw`font-bold inline`)}>{launch?.['mission']?.name}</a> : {launch?.['mission']?.description}
+            <h2 css={xw`text-xl md:text-2xl my-2`}>
+              🛰️ <a css={xw`font-bold inline`}>{launch?.['mission']?.name}</a> : {launch?.['mission']?.description}
             </h2>
-            <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
-              🚀 <a className={css(tw`font-bold inline`)}>{launch?.rocket?.configuration?.name}</a> | {launch?.['launch_service_provider']?.name}
+            <h2 css={xw`text-xl md:text-2xl my-2`}>
+              🚀 <a css={xw`font-bold inline`}>{launch?.rocket?.configuration?.name}</a> | {launch?.['launch_service_provider']?.name}
             </h2>
-            <h2 className={css(tw`text-xl md:text-2xl my-2`)}>
-              🌎 <a className={css(tw`font-bold inline`)}>{launch?.pad?.name}</a> | {launch?.pad?.location?.name}
+            <h2 css={xw`text-xl md:text-2xl my-2`}>
+              🌎 <a css={xw`font-bold inline`}>{launch?.pad?.name}</a> | {launch?.pad?.location?.name}
             </h2>
           </div>
         </div>
@@ -174,13 +186,13 @@ const SpaceList = () => {
       {launchData[0] && (
         <HeaderLaunch launch={launchData[0]}/>
       )}
-      <div className={"launch-list " + css(tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl`)}>
+      <div className={"launch-list"} css={xw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl`}>
         {launchData.splice(1).map((launch, i) => (
           <LaunchBox launch={launch} key={i}/>
         ))}
       </div>
       {isLoadingMore && (
-        <h1 className={css(tw`text-center pt-10 font-thin text-2xl`)}>
+        <h1 css={xw`text-center pt-10 font-thin text-2xl`}>
           Loading...
         </h1>
       )}

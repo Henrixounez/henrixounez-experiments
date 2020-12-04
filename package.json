@@ -8,25 +8,23 @@
     "build:base-css": "tailwindcss build ./styles/tailwind.base.css -o ./styles/base.css"
   },
   "dependencies": {
-    "@emotion/css": "^11.0.0",
     "@emotion/react": "^11.1.1",
     "@emotion/styled": "^11.0.0",
     "date-fns": "^2.16.1",
-    "next": "^10.0.2",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^6.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "swr": "^0.3.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.7",
+    "@babel/core": "^7.12.9",
     "@emotion/babel-plugin": "^11.0.0",
-    "@emotion/server": "^11.0.0",
-    "@tailwindcss/ui": "^0.7.2",
-    "@tailwindcssinjs/macro": "^0.17.0",
-    "babel-plugin-macros": "^2.8.0",
-    "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^2.0.1"
+    "autoprefixer": "10.0.2",
+    "next": "latest",
+    "postcss": "8.1.10",
+    "tailwindcss": "^2.0.1",
+    "xwind": "0.7.2"
   },
   "license": "MIT"
 }

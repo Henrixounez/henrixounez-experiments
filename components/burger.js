@@ -1,6 +1,6 @@
-import { css } from '@emotion/css';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import tw from '@tailwindcssinjs/macro';
+import xw from 'xwind';
 
 const burgerLine = `
   height: 1px;
@@ -12,7 +12,7 @@ const burgerLine = `
   transition: 200ms;
 `
 
-const BurgerButton = styled('div')`
+const BurgerButton = styled.div`
   ${burgerLine}
   ${({open}) => open ? `
     background-color: transparent;
@@ -41,7 +41,10 @@ const BurgerButton = styled('div')`
 `;
 
 const Burger = ({open, setOpen}) => (
-  <div className={css(tw`md:hidden flex items-center justify-center cursor-pointer`, `height:30px; width: 30px;`)} onClick={() => setOpen(!open)}>
+  <div
+    css={[xw`md:hidden flex items-center justify-center cursor-pointer`, css`height:30px; width: 30px;`]}
+    onClick={() => setOpen(!open)}
+  >
     <BurgerButton open={open}/>
   </div>
 )

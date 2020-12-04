@@ -1,6 +1,4 @@
-import { css } from '@emotion/css'
-import tw from '@tailwindcssinjs/macro'
-
+import xw from 'xwind';
 
 const createAutoMove = (value, valueFunc, valueChange, direction, stopFunction, lowLimit=false) => {
     const interval = setInterval(() => {
@@ -21,12 +19,12 @@ const createAutoMove = (value, valueFunc, valueChange, direction, stopFunction, 
 
 
 const ControlButton = ({text, onClick, disabled=false}) => (
-    <div onClick={!disabled && onClick} className={css(tw`select-none border-gray-100 border-solid border-2 py-2 shadow-xl rounded-lg cursor-pointer flex items-center justify-center`)}>
+    <div onClick={!disabled && onClick} css={xw`select-none border-gray-100 border-solid border-2 py-2 shadow-xl rounded-lg cursor-pointer flex items-center justify-center`}>
         {text}
     </div>
 );
 const ControlValue = ({text}) => (
-    <div className={css(tw`border-gray-100 border-solid border-2 py-2 shadow-xl rounded-lg flex items-center justify-center`)}>
+    <div css={xw`border-gray-100 border-solid border-2 py-2 shadow-xl rounded-lg flex items-center justify-center`}>
         {text}
     </div>
 )
@@ -60,7 +58,7 @@ const ControlEmpty = () => (
         <div/>
         <div/>
         <div/>
-        <div className={css(tw`py-2`)}/>
+        <div css={xw`py-2`}/>
         <div/>
         <div/>
         <div/>

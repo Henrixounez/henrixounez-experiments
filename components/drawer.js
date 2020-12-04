@@ -1,14 +1,14 @@
+import { css } from '@emotion/react';
 import Link from 'next/link';
-import { css } from "@emotion/css";
-import tw from '@tailwindcssinjs/macro';
+import xw from 'xwind';
 
 const Drawer = ({isOpen, links}) => (
-  <div className={css(tw`fixed bg-white duration-1000 w-full pt-16 overflow-hidden z-10`, `${isOpen ? 'height: 100vh;' : 'transform: translateY(-100px); height: 0vh;'}`)}>
-    <div className={css(tw`duration-1000 flex flex-col items-center`, `${isOpen ? 'opacity: 1;' : 'opacity: 0;'}`)}>
+  <div css={[xw`fixed bg-white duration-1000 w-full pt-16 overflow-hidden z-10`, css`${isOpen ? 'height: 100vh;' : 'transform: translateY(-100px); height: 0vh;'}`]}>
+    <div css={[xw`duration-1000 flex flex-col items-center`, css`${isOpen ? 'opacity: 1;' : 'opacity: 0;'}`]}>
       {
         links.map((e, i) => (
           <Link key={i} href={e.link}>
-            <a className={css(tw`text-xl font-bold py-3`)}>
+            <a css={xw`text-xl font-bold py-3`}>
               {e.name}
             </a>
           </Link>  

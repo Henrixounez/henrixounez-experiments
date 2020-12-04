@@ -1,5 +1,5 @@
-import { css, keyframes } from '@emotion/css'
-import tw from '@tailwindcssinjs/macro'
+import { css, keyframes } from '@emotion/react';
+import xw from 'xwind';
 import Layout from '../../components/layout';
 import LinkList from '../../components/linklist';
 
@@ -31,29 +31,29 @@ const textAnimation = keyframes`
 const About = () => {
   return (
     <Layout title='About'>
-      <div className={css(tw`flex flex-col items-center max-w-full`, `width: 1280px`)}>
-        <img src='/profile.jpg' alt='profile-pic' className={css(tw`h-32 md:h-64`)}/>
-        <div className={css(tw`flex flex-row justify-center items-center pt-5`)}>
-          <h1 className={css(tw`text-3xl md:text-5xl font-black`)}>
+      <div css={[xw`flex flex-col items-center max-w-full`, css`width: 1280px`]}>
+        <img src='/profile.jpg' alt='profile-pic' css={xw`h-32 md:h-64`}/>
+        <div css={xw`flex flex-row justify-center items-center pt-5`}>
+          <h1 css={xw`text-3xl md:text-5xl font-black`}>
             Henrixounez
           </h1>
           <a href='https://www.github.com/henrixounez'>
-            <img className={css(tw`h-10 pl-5 hover:h-11 duration-200`)} src='/github-icon.svg' alt='github-icon'/>
+            <img css={xw`h-10 pl-5 hover:h-11 duration-200`} src='/github-icon.svg' alt='github-icon'/>
           </a>
         </div>
-        <div className={css(tw`overflow-hidden pt-5 max-w-full`)}>
+        <div css={xw`overflow-hidden pt-5 max-w-full`}>
           { texts.map((chunk, i) => (
-            <div key={i} className={css(tw`flex flex-row`)}>
-              <div className={css(tw`flex flex-row`, `animation: ${textAnimation} ${animationSpeeds[i]}s linear infinite`)}>
+            <div key={i} css={xw`flex flex-row`}>
+              <div css={[xw`flex flex-row`, css`animation: ${textAnimation} ${animationSpeeds[i]}s linear infinite`]}>
                 {chunk.map((e, i2) => (
-                  <h2 key={i2} className={css(tw`text-5xl md:text-5rem px-5 md:px-20 whitespace-nowrap`, `font-weight: ${e.weight}`)}>
+                  <h2 key={i2} css={[xw`text-5xl md:text-5rem px-5 md:px-20 whitespace-nowrap`, css`font-weight: ${e.weight}`]}>
                     {e.name}
                   </h2>
                 ))}
               </div>
-              <div className={css(tw`flex flex-row`, `animation: ${textAnimation} ${animationSpeeds[i]}s linear infinite;transition-delay: ${animationSpeeds[i] / 2}s`)}>
+              <div css={[xw`flex flex-row`, css`animation: ${textAnimation} ${animationSpeeds[i]}s linear infinite;transition-delay: ${animationSpeeds[i] / 2}s`]}>
                 {chunk.map((e, i2) => (
-                  <h2 key={i2} className={css(tw`text-5xl md:text-5rem px-5 md:px-20 whitespace-nowrap`, `font-weight: ${e.weight}`)}>
+                  <h2 key={i2} css={[xw`text-5xl md:text-5rem px-5 md:px-20 whitespace-nowrap`, css`font-weight: ${e.weight}`]}>
                     {e.name}
                   </h2>
                 ))}
@@ -61,8 +61,8 @@ const About = () => {
             </div>
           ))}
         </div>
-        <div className={css(tw`flex flex-col items-center pt-16 max-w-full`)}>
-          <h1 className={css(tw`text-3xl md:text-5xl font-black`)}>
+        <div css={xw`flex flex-col items-center pt-16 max-w-full`}>
+          <h1 css={xw`text-3xl md:text-5xl font-black`}>
             Credits
           </h1>
           <LinkList list={credits}/>

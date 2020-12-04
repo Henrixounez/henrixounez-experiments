@@ -1,29 +1,29 @@
+import { css } from '@emotion/react';
 import Link from 'next/link'
-import { css } from '@emotion/css'
-import tw from '@tailwindcssinjs/macro'
+import xw from 'xwind';
 import boldTransitionBefore from './boldtexttransition';
 
 const LinkList = ({list}) => (
-  <div className={css(tw`container max-w-full`, `width: 1280px;`)}>
+  <div css={[xw`container max-w-full`, css`width: 1280px;`]}>
     {
       list.map((link, i) => (
-        <div key={i} className={css(tw`flex flex-row`)}>
-          <h1 className={css(tw`text-3xl font-light`)}>
+        <div key={i} css={xw`flex flex-row`}>
+          <h1 css={xw`text-3xl font-light`}>
             {link.icon} |&nbsp;
           </h1>
-          <div className={css(tw`flex flex-col items-start`)}>
+          <div css={xw`flex flex-col items-start`}>
             {link.intra ? (
               <Link href={link.link}>
-                <a className={css(tw`text-3xl font-medium hover:font-bold duration-200`, boldTransitionBefore(link.name, "700"))}>
+                <a css={[xw`cursor-pointer text-3xl font-medium hover:font-bold duration-200`, boldTransitionBefore(link.name, "700")]}>
                   {link.name}
                 </a>
               </Link>
             ) : (
-              <a href={link.link} className={css(tw`text-3xl font-medium hover:font-bold duration-200`, boldTransitionBefore(link.name, "700"))}>
+              <a href={link.link} css={[xw`cursor-pointer text-3xl font-medium hover:font-bold duration-200`, boldTransitionBefore(link.name, "700")]}>
                 {link.name}
               </a>
             )}
-            <h2 className={css(tw`text-base pt-2 text-gray-500`)}>
+            <h2 css={xw`text-base pt-2 text-gray-500`}>
               {link.description}
             </h2>
           </div>
