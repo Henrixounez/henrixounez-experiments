@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { css, keyframes } from '@emotion/react';
 import xw from 'xwind';
 
@@ -70,7 +71,9 @@ const HeaderLaunch = ({launch}) => {
 
   return (
     <div css={[xw`relative mb-8 rounded-lg overflow-hidden max-w-7xl`, css`min-height: 80vh; max-height: 80vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`]}>
-      <img css={[xw`object-cover`, css`height: 80vh; width: 100%; filter: brightness(80%);`]} src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
+      <div css={[css`height: 80vh; min-height: 80vh; min-width: 80rem; max-width: 80rem; width: 100%; filter: brightness(80%);`]}>
+        <Image layout='fill' objectFit='cover' src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
+      </div>
       <div css={[xw`absolute`, css`top: 0; left: 0; right: 0; bottom: 0;`]}>
         <div css={xw`flex flex-col justify-between font-bold text-center text-white p-5 h-full w-full pb-1`}>
           <h1 css={xw`font-bold text-2xl md:text-5xl`}>
@@ -118,7 +121,9 @@ const LaunchBox = ({launch}) => {
 
   return (
     <div className={"launch"} css={[xw`relative rounded-lg overflow-hidden`, css`min-height: 50vh; max-height: 50vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`]}>
-      <img css={[xw`object-cover`, css`height: 50vh; width: 100%; filter: brightness(80%);`]} src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
+      <div css={[css`height: 50vh; width: 100%; filter: brightness(80%);`]}>
+        <Image objectFit='cover' layout='fill' src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
+      </div>
       <div css={[xw`absolute`, css`top: 0; left: 0; right: 0; bottom: 0;`]}>
         <div css={xw`flex flex-col justify-between font-bold text-center text-white p-5 h-full w-full pb-1`}>
           <h1>
@@ -158,7 +163,7 @@ const SpaceList = () => {
   }, fetcher)
   const isLoadingInitialData = !data && !error;
   const isLoadingMore = isLoadingInitialData || (size > 0 && data && typeof data[size - 1] === "undefined");
-  const isEmpty = data?.[0]?.results.length === 0;
+  const isEmpty = data?.[0]?.results?.length === 0;
   const isReachingEnd = isEmpty || (data && data[data.length - 1]?.results.length < PAGE_SIZE);
 
   useEffect(() => {

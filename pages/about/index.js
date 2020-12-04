@@ -1,4 +1,5 @@
 import { css, keyframes } from '@emotion/react';
+import Image from 'next/image';
 import xw from 'xwind';
 import Layout from '../../components/layout';
 import LinkList from '../../components/linklist';
@@ -32,13 +33,13 @@ const About = () => {
   return (
     <Layout title='About'>
       <div css={[xw`flex flex-col items-center max-w-full`, css`width: 1280px`]}>
-        <img src='/profile.jpg' alt='profile-pic' css={xw`h-32 md:h-64`}/>
+        <Image height='300' width='300' src='/profile.jpg' alt='profile-pic'/>
         <div css={xw`flex flex-row justify-center items-center pt-5`}>
           <h1 css={xw`text-3xl md:text-5xl font-black`}>
             Henrixounez
           </h1>
-          <a href='https://www.github.com/henrixounez'>
-            <img css={xw`h-10 pl-5 hover:h-11 duration-200`} src='/github-icon.svg' alt='github-icon'/>
+          <a href='https://www.github.com/henrixounez' css={xw`relative w-10 hover:w-11 h-10 hover:h-11 duration-200 ml-5`}>
+            <Image layout='fill' src='/github-icon.svg' alt='github-icon'/>
           </a>
         </div>
         <div css={xw`overflow-hidden pt-5 max-w-full`}>
