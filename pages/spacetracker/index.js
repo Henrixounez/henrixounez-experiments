@@ -70,8 +70,8 @@ const HeaderLaunch = ({launch}) => {
   const [moreInfo, setMoreInfo] = useState(false);
 
   return (
-    <div css={[xw`relative mb-8 rounded-lg overflow-hidden max-w-7xl`, css`min-height: 80vh; max-height: 80vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`]}>
-      <div css={[css`height: 80vh; min-height: 80vh; min-width: 80rem; max-width: 80rem; width: 100%; filter: brightness(80%);`]}>
+    <div css={[xw`relative mb-8 rounded-lg overflow-hidden max-w-7xl`, css`min-height: 80vh; max-height: 80vh; max-width: 100vw; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`]}>
+      <div css={[xw`relative`, css`height: 80vh; width: 80rem; max-width: min(100vw, 80rem); filter: brightness(80%);`]}>
         <Image layout='fill' objectFit='cover' src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
       </div>
       <div css={[xw`absolute`, css`top: 0; left: 0; right: 0; bottom: 0;`]}>
@@ -121,7 +121,7 @@ const LaunchBox = ({launch}) => {
 
   return (
     <div className={"launch"} css={[xw`relative rounded-lg overflow-hidden`, css`min-height: 50vh; max-height: 50vh; box-shadow: 0 30px 60px rgba(0,0,0,0.12);`]}>
-      <div css={[css`height: 50vh; width: 100%; filter: brightness(80%);`]}>
+      <div css={[xw`relative`, css`height: 50vh; width: 100%; filter: brightness(80%);`]}>
         <Image objectFit='cover' layout='fill' src={launch.image || '/empty-img.jpg'} alt="launch-image"/>
       </div>
       <div css={[xw`absolute`, css`top: 0; left: 0; right: 0; bottom: 0;`]}>
@@ -164,7 +164,7 @@ const SpaceList = () => {
   const isLoadingInitialData = !data && !error;
   const isLoadingMore = isLoadingInitialData || (size > 0 && data && typeof data[size - 1] === "undefined");
   const isEmpty = data?.[0]?.results?.length === 0;
-  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.results.length < PAGE_SIZE);
+  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.results?.length < PAGE_SIZE);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -185,9 +185,15 @@ const SpaceList = () => {
     }
   }
 
-  const launchData = !data ? [] : data.reduce((acc, e) => {acc.push(...e.results); return acc}, []).flat().filter((e) => ![3, 4, 7].includes(e.status.id));
+  const launchData = !data ? [] : data.reduce((acc, e) => {e.results && acc.push(...e.results); return acc}, []).flat().filter((e) => ![3, 4, 7].includes(e.status.id));
   return (
     <div>
+      {data && data[0] && data[0].detail && (
+        <>
+          Error fetching data:<br/>
+          {data[0].detail}
+        </>
+      )}
       {launchData[0] && (
         <HeaderLaunch launch={launchData[0]}/>
       )}
