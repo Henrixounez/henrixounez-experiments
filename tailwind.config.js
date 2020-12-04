@@ -33,7 +33,7 @@ module.exports = {
   },
   variants: {},
   plugins: [],
-  // purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
+  purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
   xwind: {
     mode: 'objectstyles',
   },
