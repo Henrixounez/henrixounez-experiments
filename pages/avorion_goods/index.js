@@ -61,6 +61,7 @@ const AvorionGoods = () => {
                 <input
                     css={xw`border-gray-400 border-solid border-2 rounded p-1`}
                     type='text'
+                    aria-label='Search Name'
                     placeholder='Search Name'
                     onChange={(e) => setSearch(e.target.value)}
                 />
