@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head />
-        <link rel="stylesheet" rel="preload" as="style" href="https://rsms.me/inter/inter.css" />
+        <link rel="stylesheet" as="style" href="https://rsms.me/inter/inter.css" />
         <body>
           <Main />
           <NextScript />

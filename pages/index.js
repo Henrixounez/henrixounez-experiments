@@ -4,7 +4,8 @@ import LinkList from '../components/linklist'
 
 const pages = [
   {link: '/spacetracker', intra: true, name: 'Space Tracker', description: 'Space events calendar', icon: '🚀'},
-  {link: '/geometry', intra: true, name: 'Geometry', description: 'Geometry visualisations', icon: '📐'}
+  {link: '/geometry', intra: true, name: 'Geometry', description: 'Geometry visualisations', icon: '📐'},
+  {link: '/avorion_goods', intra: true, name: 'Avorion Goods', description: 'Find and Evaluate trade goods in Avorion', icon: '📈'},
 ]
 
 const Index = () => (

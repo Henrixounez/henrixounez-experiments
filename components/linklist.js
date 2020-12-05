@@ -7,7 +7,7 @@ const LinkList = ({list}) => (
   <div css={[xw`container max-w-full`, css`width: 1280px;`]}>
     {
       list.map((link, i) => (
-        <div key={i} css={xw`flex flex-row`}>
+        <div key={i} css={xw`flex flex-row mb-5`}>
           <h1 css={xw`text-3xl font-light`}>
             {link.icon} |&nbsp;
           </h1>
