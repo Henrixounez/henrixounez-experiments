@@ -2,7 +2,8 @@
 // Event handlers like onClick can't be added to this file
 
 // ./pages/_document.js
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import xw from 'xwind';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -15,7 +16,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head />
         <link rel="stylesheet" as="style" href="https://rsms.me/inter/inter.css" />
-        <body>
+        <body css={xw`bg-white text-black dark:bg-gray-900 dark:text-white duration-500`}>
           <Main />
           <NextScript />
         </body>

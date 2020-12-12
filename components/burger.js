@@ -6,7 +6,6 @@ const burgerLine = `
   height: 1px;
   width: 25px;
   border-radius: 2.5px;
-  background-color: black;
   content: "";
   display: block;
   transition: 200ms;
@@ -45,7 +44,7 @@ const Burger = ({open, setOpen}) => (
     css={[xw`md:hidden flex items-center justify-center cursor-pointer`, css`height:30px; width: 30px;`]}
     onClick={() => setOpen(!open)}
   >
-    <BurgerButton open={open}/>
+    <BurgerButton open={open} className="burger-button"/>
   </div>
 )
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { css, keyframes } from '@emotion/react';
-import xw from 'xwind';
+import xw, {cx} from 'xwind';
 
 import Layout from '../../components/layout'
 import DatePrinter from '../../components/date'
@@ -11,19 +11,22 @@ const PAGE_SIZE = 12;
 
 const fetcher = url => fetch(url).then(r => r.json())
 
-const Chevron = ({onClick, inverted=false, small=false, color="#FFFFFF", style=""}) => (
+const Chevron = ({onClick, inverted=false, small=false, color="white", style=""}) => (
   <div css={[xw`cursor-pointer flex items-center justify-center`, css`height: 25px; width: 25px;`, style]}>
-    <div css={css`
+    <div css={[
+      xw`dark:border-white`,
+      cx`border-${color}`,
+      css`
       height: ${small ? 10 : 20}px;
       width: ${small ? 10 : 20}px;
       transition: 200ms; transform:
       rotate(${inverted ? "225deg" : "45deg"});
-      border: 2px solid ${color};
+      border: 2px solid;
       box-sizing: content-box;
       border-width: 2px 0 0 2px;
       &:hover {
         border-width: ${small ? 3 : 4}px 0 0 ${small ? 3 : 4}px;
-      }`}
+      }`]}
       onClick={onClick}
     />
   </div>
@@ -89,10 +92,10 @@ const HeaderLaunch = ({launch}) => {
             <Chevron onClick={() => setMoreInfo(!moreInfo)} style="margin-top: 10px;"/>
           </div>
         </div>
-        <div css={[xw`absolute rounded-lg bg-white duration-1000 overflow-auto w-full`, css`height: ${moreInfo ? '80vh' : '0vh'}; max-height: 80vh; top: ${moreInfo ? '0%' : '100%'}`]}>
+        <div css={[xw`absolute rounded-lg bg-white dark:bg-gray-800 duration-1000 overflow-auto w-full`, css`height: ${moreInfo ? '80vh' : '0vh'}; max-height: 80vh; top: ${moreInfo ? '0%' : '100%'}`]}>
           <div css={xw`flex flex-col`, css`padding: 1rem;`}>
             <div css={xw`flex flex-col items-center`}>
-              <Chevron onClick={() => setMoreInfo(!moreInfo)} inverted={true} color="#000000" style="margin-top: 10px; margin-bottom: 10px"/>
+              <Chevron onClick={() => setMoreInfo(!moreInfo)} inverted={true} color="black" style="margin-top: 10px; margin-bottom: 10px"/>
               <h1 css={xw`font-bold text-xl md:text-4xl`}>
                 <Countdown timeString={launch.window_start || launch.window_end || launch.net}/><br/>
               </h1>
@@ -136,9 +139,9 @@ const LaunchBox = ({launch}) => {
             <Chevron onClick={() => setMoreInfo(!moreInfo)} small={true} style="margin-top: 5px;"/>
           </div>
         </div>
-        <div css={[xw`absolute rounded-lg bg-white duration-1000 overflow-auto`, css`height: ${moreInfo ? '50vh' : '0vh'}; max-height: 50vh; top: ${moreInfo ? '0%' : '100%'}`]}>
+        <div css={[xw`absolute rounded-lg bg-white dark:bg-gray-800 duration-1000 overflow-auto`, css`height: ${moreInfo ? '50vh' : '0vh'}; max-height: 50vh; top: ${moreInfo ? '0%' : '100%'}`]}>
           <div css={[xw`flex flex-col`, css`padding: 1rem;`]}>
-            <Chevron onClick={() => setMoreInfo(!moreInfo)} inverted={true} small={true} color="#000000" style="align-self: center;"/>
+            <Chevron onClick={() => setMoreInfo(!moreInfo)} inverted={true} small={true} color="black" style="align-self: center;"/>
             <h2 css={xw`text-xl md:text-2xl my-2`}>
               🛰️ <a css={xw`font-bold inline`}>{launch?.['mission']?.name}</a> : {launch?.['mission']?.description}
             </h2>

@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import xw from 'xwind';
+import DarkLightButton from './darkLightButton';
 
 const Drawer = ({isOpen, links}) => (
-  <div css={[xw`fixed bg-white duration-1000 w-full pt-16 overflow-hidden z-10`, css`${isOpen ? 'height: 100vh;' : 'transform: translateY(-100px); height: 0vh;'}`]}>
+  <div css={[xw`fixed bg-white dark:bg-gray-900 duration-1000 w-full pt-16 overflow-hidden z-10`, css`${isOpen ? 'height: 100vh;' : 'transform: translateY(-100px); height: 0vh;'}`]}>
     <div css={[xw`duration-1000 flex flex-col items-center`, css`${isOpen ? 'opacity: 1;' : 'opacity: 0;'}`]}>
+      <DarkLightButton/>
       {
         links.map((e, i) => (
           <Link key={i} href={e.link}>
@@ -18,4 +20,4 @@ const Drawer = ({isOpen, links}) => (
   </div>
 )
 
-export default Drawer
+export default Drawer;

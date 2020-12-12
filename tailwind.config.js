@@ -31,6 +31,10 @@ module.exports = {
       '7rem': '7rem'
     }
   },
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
   variants: {},
   plugins: [],
   purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],

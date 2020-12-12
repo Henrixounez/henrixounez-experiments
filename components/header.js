@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import xw, { cx } from 'xwind';
+import xw from 'xwind';
 import Drawer from './drawer';
 import Burger from './burger';
 import boldTransitionBefore from './boldtexttransition';
 import { css } from '@emotion/react';
+import DarkLightButton from './darkLightButton';
 
 const links = [
   {link: '/about', name: 'About'},
@@ -41,7 +42,7 @@ export default function Header({title, showPage}) {
       <Drawer links={links} isOpen={drawerOpen}/>
       <div
         css={[
-          xw`p-2 fixed bg-white w-full duration-500 flex flex-row justify-center items-center z-10`,
+          xw`p-2 fixed w-full duration-500 flex flex-row justify-center items-center z-10`,
           css`
             ${drawerOpen || showHeader ? 
               // 'box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);' :
@@ -77,6 +78,7 @@ export default function Header({title, showPage}) {
                     </Link>
                   ))
                 }
+                <DarkLightButton/>
               </div>
             )}
           </div>

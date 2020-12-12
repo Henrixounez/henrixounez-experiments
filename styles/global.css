@@ -1,0 +1,19 @@
+.burger-button {
+  background-color: black;
+}
+.burger-button::before {
+  background-color: black;
+}
+.burger-button::after {
+  background-color: black;
+}
+
+.dark .burger-button {
+  background-color: white;
+}
+.dark .burger-button::before {
+  background-color: white;
+}
+.dark .burger-button::after {
+  background-color: white;
+}

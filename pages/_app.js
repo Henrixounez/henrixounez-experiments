@@ -3,8 +3,13 @@ import { Global } from '@emotion/react';
 import xw from 'xwind';
 
 import '../styles/base.css';
+import '../styles/global.css';
+import { checkDark } from '../components/dark_fn';
 
 function App({ Component, pageProps }) {
+  if (typeof window !== "undefined")
+    checkDark();
+
   return (
     <>
       <Head>

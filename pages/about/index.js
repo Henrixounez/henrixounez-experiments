@@ -33,12 +33,15 @@ const About = () => {
   return (
     <Layout title='About'>
       <div css={[xw`flex flex-col items-center max-w-full`, css`width: 1280px`]}>
-        <Image height='300' width='300' src='/profile.jpg' alt='profile-pic'/>
+        <div css={[xw`rounded-full overflow-hidden`, css`height: 300px`]}>
+          <Image height='300' width='300' src='/profile.jpg' alt='profile-pic'/>
+        </div>
         <div css={xw`flex flex-row justify-center items-center pt-5`}>
           <h1 css={xw`text-3xl md:text-5xl font-black`}>
             Henrixounez
           </h1>
-          <a href='https://www.github.com/henrixounez' css={xw`relative w-10 hover:w-11 h-10 hover:h-11 duration-200 ml-5`}>
+          <a href='https://www.github.com/henrixounez' css={xw`relative w-10 hover:w-11 h-10 hover:h-11 duration-200 ml-5 rounded-full`}>
+            <div css={[xw`absolute bg-white rounded-full`, css`top: 3%; left: 3%; width: 94%; height: 94%;`]}/>
             <Image layout='fill' src='/github-icon.svg' alt='github-icon'/>
           </a>
         </div>

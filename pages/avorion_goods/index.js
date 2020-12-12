@@ -59,7 +59,7 @@ const AvorionGoods = () => {
         <Layout title='Avorion' showPage title='Avorion Goods' description='Find and Evaluate trade goods in Avorion'>
             <div css={[xw`flex flex-row items-start justify-start mb-10`, css`width: 1280px;`]}>
                 <input
-                    css={xw`border-gray-400 border-solid border-2 rounded p-1`}
+                    css={xw`border-gray-400 border-solid border-2 rounded p-1 dark:bg-gray-900`}
                     type='text'
                     aria-label='Search Name'
                     placeholder='Search Name'
@@ -74,11 +74,11 @@ const AvorionGoods = () => {
                         ))}
                     </colgroup>
                     <thead>
-                        <tr css={[xw`bg-gray-100`]}>
+                        <tr css={[xw`bg-gray-100 dark:bg-gray-800`]}>
                             {fields_name.map(({display, name}, i) => (
                                 <td
                                     key={i}
-                                    css={[xw`cursor-pointer border-gray-300 border-dashed border-l-2 hover:bg-gray-200`, css`${i === 0 && 'border-left: 0;'}`]}
+                                    css={[xw`cursor-pointer border-gray-300 border-dashed border-l-2 hover:bg-gray-200 dark:hover:bg-gray-700`, css`${i === 0 && 'border-left: 0;'}`]}
                                     onClick={() => modifySort(name)}
                                 >
                                     {display}{sort.field === name ? (sort.sort === -1 ? ' ▼' : (sort.sort === 1 && ' ▲')) : ''}
@@ -88,7 +88,7 @@ const AvorionGoods = () => {
                     </thead>
                     <tbody>
                         {goods_list.map((good, i) => (
-                            <tr key={i} css={[xw`border-gray-400 border-solid border-2 even:bg-gray-100 hover:bg-gray-200`, css`border-left: 0; border-right: 0; border-bottom: 0;`]}>
+                            <tr key={i} css={[xw`border-gray-400 border-solid border-2 even:bg-gray-100 hover:bg-gray-200 dark:even:bg-gray-800 dark:hover:bg-gray-700`, css`border-left: 0; border-right: 0; border-bottom: 0;`]}>
                                 {fields_name.map(({name}, j) => (
                                     <td key={j} css={[xw`border-gray-300 border-dotted border-l-2`, css`${j === 0 && 'border-left: 0;'}`]}>
                                         {typeof(good[name]) === "object" ? good[name].join(', ') : good[name]}
