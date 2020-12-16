@@ -5,7 +5,7 @@ import Header from './header';
 const Layout = ({children, title, showPage}) => (
   <div>
     <Head>
-      <title>{title} | Henrixounez</title>
+      <title>{typeof(title) === "object" ? title.map((e) => e.name).join(' / ') : title} | Henrixounez</title>
       <meta name="Description" content={title}/>
     </Head>
     <Header title={title} showPage={showPage}/>

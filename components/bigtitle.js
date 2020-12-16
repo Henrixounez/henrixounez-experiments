@@ -2,14 +2,14 @@ import { css } from '@emotion/react';
 import xw from 'xwind';
 import mq from './breakpoints';
 
-const BigTitle = ({children, height='0'}) => (
+const BigTitle = ({children, height=70}) => (
   <div
     css={[
       xw`flex items-center justify-center`,
       css`
-        min-height: 60vh;
+        min-height: ${height - 10}vh;
         ${mq[1]} {
-          min-height: 70vh;
+          min-height: ${height}vh;
         }
       `
     ]}

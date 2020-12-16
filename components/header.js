@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import xw from 'xwind';
 import Drawer from './drawer';
@@ -42,7 +42,7 @@ export default function Header({title, showPage}) {
       <Drawer links={links} isOpen={drawerOpen}/>
       <div
         css={[
-          xw`p-2 fixed w-full duration-500 flex flex-row justify-center items-center z-10`,
+          xw`p-2 fixed w-full duration-500 flex flex-row justify-center items-center z-10 bg-white dark:bg-gray-900`,
           css`
             ${drawerOpen || showHeader ? 
               // 'box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);' :
@@ -61,7 +61,33 @@ export default function Header({title, showPage}) {
             </Link>
             {showPage && (
               <span css={xw`text-xl font-thin`}>
-                &nbsp;| {title}
+                &nbsp;|&nbsp;
+                {typeof(title) === "object" ? (
+                  <>
+                    {title.map((link, i) => (
+                      <Fragment key={i}>
+                        {i !== 0 && " / "}
+                        {link.link ? (
+                          <Link href={link.link}>
+                            <a css={[xw`cursor-pointer text-xl duration-200 font-thin hover:font-light`, boldTransitionBefore(link.name, "300")]}>
+                              {link.name}
+                            </a>
+                          </Link>                        
+                        ) : (
+                          <>
+                            <a css={[xw`text-xl duration-200 font-thin`]}>
+                              {link.name}
+                            </a>
+                          </>
+                        )}
+                      </Fragment>
+                    ))}
+                  </>
+                ) : (
+                  <a css={[xw`text-xl duration-200 font-thin`]}>
+                    {title}
+                  </a>
+                )}
               </span>
             )}
           </div>
