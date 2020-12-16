@@ -75,18 +75,18 @@ export default function Header({title, showPage}) {
                           </Link>                        
                         ) : (
                           <>
-                            <a css={[xw`text-xl duration-200 font-thin`]}>
+                            <p css={[xw`inline text-xl duration-200 font-thin`]}>
                               {link.name}
-                            </a>
+                            </p>
                           </>
                         )}
                       </Fragment>
                     ))}
                   </>
                 ) : (
-                  <a css={[xw`text-xl duration-200 font-thin`]}>
+                  <p css={[xw`inline text-xl duration-200 font-thin`]}>
                     {title}
-                  </a>
+                  </p>
                 )}
               </span>
             )}
