@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
 import xw from 'xwind';
+import styled from "@emotion/styled";
 import { css } from '@emotion/react';
-import Layout from "../../../components/layout";
 import Link from "next/link";
+import Layout from "./layout";
 
 export const Code = styled.pre(xw`
   bg-gray-800

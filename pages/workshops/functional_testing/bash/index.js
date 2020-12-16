@@ -1,4 +1,4 @@
-import { BlogLayout, CenterHR, CodeParagraph, CodeWithComment, H2, Paragraph } from "../shared";
+import { BlogLayout, CenterHR, CodeParagraph, CodeWithComment, H2, Paragraph } from "../../../../components/BlogShared";
 import xw from 'xwind';
 
 const Bash = () => (

@@ -1,4 +1,4 @@
-import { BlogLayout, H3 } from "../shared";
+import { BlogLayout, H3 } from "../../../../components/BlogShared";
 
 const Python = () => (
   <BlogLayout

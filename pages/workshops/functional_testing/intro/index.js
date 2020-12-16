@@ -1,5 +1,5 @@
 import xw from 'xwind';
-import { BlogLayout, CodeParagraph, CodeWithComment, H1, H2, Paragraph } from "../shared";
+import { BlogLayout, CodeParagraph, CodeWithComment } from "../../../../components/BlogShared";
 
 const Intro = () => (
   <BlogLayout

@@ -1,7 +1,7 @@
 import xw from 'xwind';
 import { css } from '@emotion/react';
 import Layout from '../../../components/layout';
-import { H1, HR, Summary } from './shared';
+import { H1, Summary } from '../../../components/BlogShared';
 
 const _summaryLinks = [
   {
