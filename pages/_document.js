@@ -34,7 +34,8 @@ export default class MyDocument extends Document {
               />
             </>
           )}
-          <link rel="stylesheet" as="style" href="https://rsms.me/inter/inter.css" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         </Head>
         <body css={xw`bg-white text-black dark:bg-gray-900 dark:text-white duration-500`}>
           <Main />
