@@ -16,7 +16,8 @@ const Bash = () => (
     ]}
     layoutDescription='Try your program functionnalities easily'
     title="2. Introducing a simple automation (Bash)"
-    nextChapter={{link: "/workshops/functional_testing/python", title: "3. Snakes are pretty good for testing too (Python)"}}
+    nextChapter={{link: "/workshops/functional_testing", title: "Index", leading: "Back to "}}
+    // nextChapter={{link: "/workshops/functional_testing/python", title: "3. Snakes are pretty good for testing too (Python)"}}
   >
     <p css={xw`mb-2`}><b>"Hey, nice transition. What do we do now?"</b></p>
     <p>

@@ -12,14 +12,14 @@ const _summaryLinks = [
     title: "2. Introducing a simple automation (Bash)",
     link: "/workshops/functional_testing/bash"
   },
-  {
-    title: "3. Snakes are pretty good for testing too (Python)",
-    link: "/workshops/functional_testing/python"
-  },
-  {
-    title: "4. Asynchronous computation for testing (Javascript)",
-    link: "/workshops/functional_testing/javascript"
-  }
+  // {
+  //   title: "3. Snakes are pretty good for testing too (Python)",
+  //   link: "/workshops/functional_testing/python"
+  // },
+  // {
+  //   title: "4. Asynchronous computation for testing (Javascript)",
+  //   link: "/workshops/functional_testing/javascript"
+  // }
 ];
 
 const Workshops = () => (
