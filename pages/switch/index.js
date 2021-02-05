@@ -9,7 +9,7 @@ const Switch = () => {
   const reconnect = useRef(null);
 
   const connect = () => {
-    ws.current = new WebSocket(`${process.env.NODE_ENV === 'development' ? 'ws://localhost:8080' : 'https://henrixounez-api.herokuapp.com'}/test/connect`);
+    ws.current = new WebSocket(`${process.env.NODE_ENV === 'development' ? 'ws://localhost:8080' : 'wss://henrixounez-api.herokuapp.com'}/test/connect`);
     ws.current.onopen = (mess) => {
       console.log('[WS] open');
     }
