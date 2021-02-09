@@ -5,8 +5,10 @@ import Layout from '../../components/layout';
 
 const Switch = () => {
   const [activated, setActivated] = useState(false);
+  const [canClick, setCanClick] = useState(true);
   const ws = useRef(null);
   const reconnect = useRef(null);
+  const canClickTm = useRef(null);
 
   const connect = () => {
     ws.current = new WebSocket(`${process.env.NODE_ENV === 'development' ? 'ws://localhost:8080' : 'wss://henrixounez-api.herokuapp.com'}/switch/connect`);
@@ -33,18 +35,27 @@ const Switch = () => {
         ws.current.close();
       if (reconnect.current)
         clearTimeout(reconnect.current);
+      if (canClickTm.current)
+        clearTimeout(canClickTm.current);
     }
   }, []);
 
   const handleClick = () => {
+    if (canClick === false || canClickTm.current)
+      return;
     try {
+      setCanClick(false);
+      canClickTm.current = setTimeout(() => {
+        setCanClick(true);
+        canClickTm.current = null;
+      }, 800);
       ws.current.send(!activated);
     } catch (e) {}
   }
 
   return (
     <Layout title='Switch' showPage description='Useless Multiplayer Switch'>
-      <button css={[xw`p-5 shadow-lg rounded-lg`, activated ? xw`bg-green-200` : xw`bg-red-200`, css`width: 100px; height: 100px`]} onClick={handleClick}>
+      <button css={[xw`p-5 shadow-lg rounded-lg duration-1000`, activated ? xw`bg-green-200 dark:bg-green-900` : xw`bg-red-200 dark:bg-red-900`, css`width: 100px; height: 100px`]} onClick={handleClick}>
         {activated ? 'ON' : 'OFF'}
       </button>
     </Layout>
