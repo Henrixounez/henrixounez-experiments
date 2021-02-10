@@ -16,6 +16,11 @@ export const Code = styled.pre(xw`
   whitespace-pre-wrap
 `);
 
+export const InlineCode = styled(Code)(xw`
+  inline
+  p-2
+`);
+
 export const H1 = styled.h1(xw`text-5xl`);
 export const H2 = styled.h2(xw`text-3xl`);
 export const H3 = styled.h2(xw`text-xl`);
@@ -23,6 +28,15 @@ export const HR = styled.hr(xw`my-14`);
 export const CenterHR = styled.hr([xw`my-8 ml-auto mr-auto`, css`width: 70%;`]);
 export const Paragraph = styled.div(xw`ml-5`);
 export const CodeParagraph = styled.div(xw`ml-5 my-6`);
+
+export const OutsideLink = (props) => (
+  <a
+    target="_blank"
+    rel="noopener noreferrer"
+    css={xw`underline text-blue-500`}
+    {...props}
+  />
+);
 
 export const CodeWithComment = ({code, text}) => (
   <div css={xw`flex flex-row items-center`}>
@@ -62,7 +76,7 @@ export const BlogLayout = ({layoutTitle, layoutDescription, title, children, nex
       </Paragraph>
       {nextChapter && (
         <H2 css={xw`mt-16 pb-16 underline`}>
-          {nextChapter.leading ? nextChapter.leading : "Next up: "}<Link href={nextChapter.link}>{nextChapter.title}</Link>
+          <Link href={nextChapter.link}>{`${nextChapter.leading ? nextChapter.leading : "Next up: "}${nextChapter.title}`}</Link>
         </H2>
       )}
     </div>

@@ -17,3 +17,7 @@
 .dark .burger-button::after {
   background-color: white;
 }
+
+.dark .dark-aware-img {
+  filter: invert(1);
+}

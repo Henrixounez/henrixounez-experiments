@@ -7,6 +7,7 @@ import BigTitle from '../../components/bigtitle';
 const pages = [
   {link: '/workshops/functional_testing', intra: true, name: 'Functional Testing on Programs', description: 'Test your whole program and its functionnalities', icon: '🚧'},
   {link: '/workshops/github_actions', intra: true, name: 'Set up Github Actions', description: 'Speed up your workflow with automations on GitHub', icon: '⚙️'},
+  {link: '/workshops/async_js', intra: true, name: 'Asynchronous Javascript', description: 'Optimize your data computation and handling with asynchrounous Javascript', icon: '🔀'},
 ]
 
 const Workshops = () => (
