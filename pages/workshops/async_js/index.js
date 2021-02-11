@@ -457,7 +457,7 @@ const fs = require('fs');
 ...
 
 async function downloadCat(id) {
-  const url = 'https://cataas.com/cat?id=' + id;
+  const url = 'https://cataas.com/cat/' + id;
   const response = await axios({url, responseType: 'stream'});
   const stream = fs.createWriteStream(id + '.jpg');
   response.data.pipe(stream);
@@ -590,7 +590,7 @@ Executed in   10.05 secs   fish           external
       <br/>
       On the last exercise, our execution time has been greatly reduced with asynchronicity compared to a step by step method. However, we are limited to the amount of work a single thread of CPU can do.<br/>
       We won't see it here, but to make it even faster, you could go into the realm of the Parallel Execution, by making a parent process delegate the task of downloading to multiple children, one on each CPU thread.<br/>
-      For example, if you CPU have 8 thread, you could potentially speed up things 7 or 8 times (If you are not bottlenecked by your network or HDD/SSD writing speeds).<br/>
+      For example, if your CPU have 8 threads, you could potentially speed up things 7 or 8 times (If you are not bottlenecked by your network or HDD/SSD writing speeds).<br/>
       <br/>
       Anyway, I hope you liked it. Asynchrocity can be used in a lot of use cases, especially in web development where you have to communicate with your API, and wait for their response or an API talking to an other API or if you have big (but not too big) computation needs that can be in parallel like our cat fetching.
     </p>
