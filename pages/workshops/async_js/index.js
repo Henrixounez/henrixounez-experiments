@@ -392,7 +392,11 @@ Results: 4 5 6 7
         <CodeParagraph>
           <CodeWithComment
             code={
-`function main() {
+`const axios = require('axios');
+
+...
+
+function main() {
   const cuteCats = getCuteCats();
   console.log(cuteCats);
   process.exit(0);
@@ -447,7 +451,12 @@ Results: 4 5 6 7
         <CodeParagraph>
           <CodeWithComment
             code={
-`async function downloadCat(id) {
+`const axios = require('axios');
+const fs = require('fs');
+
+...
+
+async function downloadCat(id) {
   const url = 'https://cataas.com/cat?id=' + id;
   const response = await axios({url, responseType: 'stream'});
   const stream = fs.createWriteStream(id + '.jpg');
