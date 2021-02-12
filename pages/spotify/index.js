@@ -148,7 +148,11 @@ const Spotify = ({currentUrl}) => {
 }
 
 Spotify.getInitialProps = async (ctx) => {
-  return { currentUrl: ctx.req.headers.referer };
+  if (process.browser) {
+    return { currentUrl: window.location.href };
+  } else {
+    return { currentUrl: ctx.req.headers.referer };
+  }
 }
 
 export default Spotify;
