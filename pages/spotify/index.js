@@ -25,7 +25,7 @@ const imgSizes = {
   base: `0.875rem`,
 };
 
-const Spotify = ({currentUrl}) => {
+const Spotify = () => {
   const [token, setToken] = useState(null);
   const [cities, setCities] = useState([]);
   const router = useRouter();
@@ -70,7 +70,7 @@ const Spotify = ({currentUrl}) => {
             '&client_id=' + process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID +
             '&scope=' + encodeURIComponent('user-top-read') +
             '&redirect_uri=' + encodeURIComponent(process.env.NEXT_PUBLIC_API + '/spotify/callback') +
-            '&state=' + currentUrl
+            '&state=' + process.env.NODE_ENV === "development" ? "http://localhost:3000/spotify" : "https://henrixounez.com/spotify"
           }
         >
           Connect with
@@ -145,14 +145,6 @@ const Spotify = ({currentUrl}) => {
       )}
     </Layout>
   );
-}
-
-Spotify.getInitialProps = async (ctx) => {
-  if (process.browser) {
-    return { currentUrl: window.location.href };
-  } else {
-    return { currentUrl: ctx.req.headers.referer };
-  }
 }
 
 export default Spotify;
