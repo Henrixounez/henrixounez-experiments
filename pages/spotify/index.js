@@ -25,7 +25,7 @@ const imgSizes = {
   base: `0.875rem`,
 };
 
-const Spotify = ({url}) => {
+const Spotify = ({currentUrl}) => {
   const [token, setToken] = useState(null);
   const [cities, setCities] = useState([]);
   const router = useRouter();
@@ -70,7 +70,7 @@ const Spotify = ({url}) => {
             '&client_id=' + process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID +
             '&scope=' + encodeURIComponent('user-top-read') +
             '&redirect_uri=' + encodeURIComponent(process.env.NEXT_PUBLIC_API + '/spotify/callback') +
-            '&state=' + url
+            '&state=' + currentUrl
           }
         >
           Connect with
@@ -148,7 +148,7 @@ const Spotify = ({url}) => {
 }
 
 Spotify.getInitialProps = async (ctx) => {
-  return { url: ctx.req.headers.referer };
+  return { currentUrl: ctx.req.headers.referer };
 }
 
 export default Spotify;
