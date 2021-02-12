@@ -77,7 +77,7 @@ const Spotify = () => {
           <img src='/Spotify_Logo_RGB_White.png' css={css`max-height: 2rem;`}/>
         </a>
       ) : (
-        <div css={[xw`flex flex-col relative px-4`, css`top: 15vh;`]}>
+        <div css={[xw`flex flex-col relative px-4 mb-40`, css`top: 15vh;`]}>
           {cities.length === 0 ? (
             <div css={[xw`flex flex-row items-center justify-center`]}>
               <div css={[
@@ -89,9 +89,14 @@ const Spotify = () => {
                 `]}/>
             </div>
           ) : (
-            <h1 css={xw`text-3xl mb-32`}>
-              Based on your Spotify musical taste, your closest city matches are :
-            </h1>
+            <div css={xw`mb-32`}>
+              <h1 css={xw`text-4xl font-black`}>
+                Your Spotify musical taste matches you with these cities :
+              </h1>
+              <p css={xw`text-sm font-thin`}>
+                (Scores are based on the ranking of number of listeners by city for each of your preferred artists)
+              </p>
+            </div>
           )}
           {cities.map((city, i) => (
             <div key={i} css={[xw`flex flex-row items-center`, css`margin-bottom: ${i < 6 ? `${((6 - i) * 1.2)}rem` : '0.5rem'}`]}>
