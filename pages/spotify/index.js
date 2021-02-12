@@ -5,6 +5,7 @@ import axios from 'axios';
 import Layout from '../../components/layout';
 import { useRouter } from 'next/router'
 import mq from '../../components/breakpoints';
+import { maybeForceDark } from '../../components/dark_fn';
 
 const sizes = {
   0:    xw`text-5xl  md:text-6xl font-black`,
@@ -52,6 +53,7 @@ const Spotify = () => {
   }, [router]);
 
   useEffect(() => {
+    maybeForceDark();
     const stored_token = sessionStorage.getItem('spotify-token') || null;
     if (stored_token) {
       setToken(stored_token);

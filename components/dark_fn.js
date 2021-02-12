@@ -8,9 +8,20 @@ export function checkDark() {
   }
 }
 
-export function toggleDark() {
-  localStorage.theme = localStorage.theme === "light" ? "dark" : "light"
+export function setTheme(theme) {
+  localStorage.theme = theme;
+  window.dispatchEvent(new Event('storage'));
   checkDark();
+}
+
+export function maybeForceDark() {
+  if (localStorage.theme === undefined) {
+    setTheme('dark');
+  }
+}
+
+export function toggleDark() {
+  setTheme(localStorage.theme === "light" ? "dark" : "light");
 }
 
 export function isDark() {
@@ -18,6 +29,10 @@ export function isDark() {
 
   useEffect(() => {
     setIsDark(localStorage.theme === "dark");
+    window.addEventListener('storage', updateDark, false);
+    return () => {
+      window.removeEventListener('storage', updateDark);
+    }
   }, []);
 
   function updateDark() {
