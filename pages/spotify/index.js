@@ -70,7 +70,7 @@ const Spotify = () => {
             '&client_id=' + process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID +
             '&scope=' + encodeURIComponent('user-top-read') +
             '&redirect_uri=' + encodeURIComponent(process.env.NEXT_PUBLIC_API + '/spotify/callback') +
-            '&state=' + process.env.NODE_ENV === "development" ? "http://localhost:3000/spotify" : "https://henrixounez.com/spotify"
+            '&state=' + (process.env.NODE_ENV === "development" ? "http://localhost:3000/spotify" : "https://henrixounez.com/spotify")
           }
         >
           Connect with
