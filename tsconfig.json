@@ -7,7 +7,6 @@
       "esnext"
     ],
     "types": [
-      "@emotion/core",
       "@emotion/react/types/css-prop"
     ],
     "allowJs": true,
