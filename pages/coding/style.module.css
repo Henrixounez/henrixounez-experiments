@@ -1,7 +1,6 @@
 .monospaced {
   font-family: monospace, ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New";
   font-weight: normal;
-  cursor: default;
   color: #DCDCDC;
 }
 
@@ -9,5 +8,4 @@
   font-family: monospace, ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New";
   font-size: 14px;
   font-weight: normal;
-  cursor: default;
 }

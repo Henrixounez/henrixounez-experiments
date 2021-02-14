@@ -279,8 +279,10 @@ const Editor = observer(() => {
           css={[
             xw`absolute overflow-scroll`,
             css`
-              left: calc(${(EditorStore.totalLines).toString().length} * 9px + 0.5em);
-              max-width: calc(100vw - ${(EditorStore.totalLines).toString().length} * 9px - 0.5em);
+              margin-left: 0.5em;
+              left: calc(${(EditorStore.totalLines).toString().length} * 9px + 1em);
+              min-width: calc(100vw - ${(EditorStore.totalLines).toString().length} * 9px - 1.5em);
+              max-width: calc(100vw - ${(EditorStore.totalLines).toString().length} * 9px - 1.5em);
               max-height: calc(100vh - 22px);
               min-height: calc(100vh - 22px);
             `,
