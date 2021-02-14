@@ -10,5 +10,10 @@
       }
     ]
   ],
-  "plugins": ["xwind/babel", "@emotion/babel-plugin"]
+  "plugins": [
+    "xwind/babel",
+    "@emotion/babel-plugin",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
+  ]
 }

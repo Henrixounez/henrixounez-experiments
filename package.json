@@ -8,12 +8,16 @@
     "build:base-css": "tailwindcss build ./styles/tailwind.base.css -o ./styles/base.css"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/plugin-proposal-decorators": "^7.12.13",
     "@emotion/react": "^11.1.1",
     "@emotion/styled": "^11.0.0",
     "axios": "^0.21.1",
     "date-fns": "^2.16.1",
     "highlight.js": "^10.6.0",
     "jshint": "^2.12.0",
+    "mobx": "^6.1.6",
+    "mobx-react": "^7.1.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^6.7.0",
     "react": "^17.0.1",

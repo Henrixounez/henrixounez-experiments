@@ -1,61 +1,5 @@
 import { KeyboardEvent } from "react";
-import hljs from 'highlight.js';
-
-interface WsData {
-  type: string,
-  data: any,
-}
-
-function sendToWs(ws: WebSocket, data: WsData) {
-  if (ws)
-    ws.send(JSON.stringify(data));
-}
-
-function highlightAll(code: HTMLElement, text: string) {
-  code.innerHTML =  hljs.highlight('javascript', text).value;
-}
-
-function cursorPosition() {
-  let sel: Selection = document.getSelection();
-  (sel as any).modify("extend", "backward", "documentboundary");
-  let pos = sel.toString().length;
-  if (sel.anchorNode != undefined)
-    sel.collapseToEnd();
-  return pos;
-}
-
-function _SetCaretAtPosition(el: any, pos: number) {            
-  for (let node of el.childNodes) {
-    if (node.nodeType === 3) {
-      if (node.length >= pos) {
-        const range = document.createRange();
-        const sel = window.getSelection();
-        range.setStart(node, pos);
-        range.collapse(true);
-        sel.removeAllRanges();
-        sel.addRange(range);
-        return -1;
-      } else {
-        pos -= node.length;
-      }
-    } else {
-      pos = _SetCaretAtPosition(node, pos);
-      if (pos === -1)
-        return -1;
-    }
-  }
-  return pos;
-}
-
-function SetCaretAtPosition(el: any, pos: number, ws: WebSocket) {
-  sendToWs(ws, {
-    type: 'moveCursor',
-    data: {
-      pos: pos
-    }
-  });
-  _SetCaretAtPosition(el, pos);
-}
+import { selRange, sendToWs, addTextAt, delTextAt, cursorPosition, findPosInText } from './helpers';
 
 function checkKeyArray(keys: string[]) {
   return (key: string) => {
@@ -63,88 +7,83 @@ function checkKeyArray(keys: string[]) {
   }
 }
 
-export function addTextAt(code: HTMLElement, pos: number, textAdd: string, ws: WebSocket) {
-  const curPos = cursorPosition();
-  let text = code.textContent;
-  text = text.substr(0, pos) + textAdd + text.substr(pos);
-  highlightAll(code, text);
-  SetCaretAtPosition(code, curPos + (curPos >= pos ? textAdd.length : 0), ws);
-}
-
-export function delTextAt(code: HTMLElement, posStart: number, posEnd: number, ws: WebSocket) {
-  const curPos = cursorPosition();
-  let text = code.textContent;
-  text = text.substr(0, posStart) + text.substr(posEnd);
-  highlightAll(code, text);
-  if (curPos >= posStart && curPos <= posEnd)
-    SetCaretAtPosition(code, posStart, ws);
-  else if (curPos > posEnd)
-    SetCaretAtPosition(code, curPos - (posEnd - posStart), ws);
-  else
-    SetCaretAtPosition(code, curPos, ws);
-}
-
-export function initText(code: HTMLElement, textAdd: string, ws: WebSocket) {
-  const curPos = cursorPosition();
-  let text = textAdd;
-  highlightAll(code, text);
-  if (curPos > text.length) {
-    SetCaretAtPosition(code, text.length, ws);
-  }
-}
-
 /************************/
 
 function normalKey(e: KeyboardEvent<HTMLElement>, code: HTMLElement, ws: WebSocket) {
-  const curPos = cursorPosition();
+  const {curPos, lastPos} = selRange(code);
   sendToWs(ws, {
     type: 'addText',
-    data: { text: e.key, pos: curPos }
+    data: { text: e.key, pos: curPos, endPos: lastPos }
   });
-  addTextAt(code, curPos, e.key, ws);
+  addTextAt(code, curPos, lastPos, e.key, ws);
 }
 function backspaceKey(e: KeyboardEvent<HTMLElement>, code: HTMLElement, ws: WebSocket) {
-  const curPos = cursorPosition();
-  if (curPos > 0) {
+  const {curPos, lastPos} = selRange(code);
+  if (curPos > 0 && curPos === lastPos) {
     sendToWs(ws, {
       type: 'delText',
       data: { startPos: curPos - 1, endPos: curPos }
     });
     delTextAt(code, curPos - 1, curPos, ws);
+  } else if (curPos !== lastPos) {
+    sendToWs(ws, {
+      type: 'delText',
+      data: { startPos: curPos, endPos: lastPos }
+    });
+    delTextAt(code, curPos, lastPos, ws);    
   }
 }
 function deleteKey(e: KeyboardEvent<HTMLElement>, code: HTMLElement, ws: WebSocket) {
-  const curPos = cursorPosition();
-  if (curPos < code.textContent.length) {
+  const {curPos, lastPos} = selRange(code);
+  if (curPos < code.textContent.length && curPos === lastPos) {
     sendToWs(ws, {
       type: 'delText',
       data: { startPos: curPos, endPos: curPos + 1 }
     });
     delTextAt(code, curPos, curPos + 1, ws);
+  } else {
+    sendToWs(ws, {
+      type: 'delText',
+      data: { startPos: curPos, endPos: lastPos }
+    });
+    delTextAt(code, curPos, lastPos, ws);
   }
 }
 function tabKey(e: KeyboardEvent<HTMLElement>, code: HTMLElement, ws: WebSocket) {
-  const curPos = cursorPosition();
+  const {curPos, lastPos} = selRange(code);
   sendToWs(ws, {
     type: 'addText',
-    data: { text: "  ", pos: curPos }
+    data: { text: "  ", pos: curPos, endPos: lastPos }
   });
-  addTextAt(code, curPos, "  ", ws);
+  addTextAt(code, curPos, lastPos, "  ", ws);
 }
 function enterKey(e: KeyboardEvent<HTMLElement>, code: HTMLElement, ws: WebSocket) {
-  const curPos = cursorPosition();
+  const {curPos, lastPos} = selRange(code);
+  const atEnd = (curPos === code.textContent.length - 1);
+
   if (!code.textContent.endsWith('\n')) {
     sendToWs(ws, {
       type: 'addText',
-      data: { text: "\n", pos: curPos }
+      data: { text: "\n", pos: curPos, endPos: curPos }
     });
-    addTextAt(code, curPos, "\n", ws);
+    addTextAt(code, curPos, curPos, "\n", ws);
   }
   sendToWs(ws, {
     type: 'addText',
-    data: { text: "\n", pos: curPos }
+    data: { text: "\n", pos: curPos, endPos: lastPos }
   });
-  addTextAt(code, curPos, "\n", ws);
+  addTextAt(code, curPos, lastPos, "\n", ws);
+  if (atEnd)
+    code.parentElement.scrollTo(0, code.parentElement.scrollHeight);
+}
+async function pasteKey(e: KeyboardEvent<HTMLElement>, code: HTMLElement, ws: WebSocket) {
+  const {curPos, lastPos} = selRange(code);
+  const text = await navigator.clipboard.readText();
+  sendToWs(ws, {
+    type: 'addText',
+    data: { text: text, pos: curPos, endPos: lastPos }
+  });
+  addTextAt(code, curPos, lastPos, text, ws);
 }
 
 /************************/
@@ -158,7 +97,6 @@ function moveCursor(e: KeyboardEvent<HTMLElement>, code: HTMLElement, ws: WebSoc
     }
   });
 }
-
 
 /************************/
 
@@ -228,12 +166,41 @@ export const fns: Function[] = [
     checkKey: checkKeyArray(["Enter"]),
   }),
   createFunction({
-    fn: (_, __) => {},
+    fn: () => {},
     checkKey: checkKeyArray(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]),
     preventDefault: false,
     alt: SpecialKeyBehavior.IGNORED,
     ctrl: SpecialKeyBehavior.IGNORED,
     shift: SpecialKeyBehavior.IGNORED,
+  }),
+  createFunction({
+    fn: pasteKey,
+    checkKey: checkKeyArray(["v", "V"]),
+    ctrl: SpecialKeyBehavior.PRESSED,
+  }),
+  createFunction({
+    fn: () => {},
+    checkKey: checkKeyArray(["c", "C",]),
+    preventDefault: false,
+    ctrl: SpecialKeyBehavior.PRESSED,
+  }),
+  createFunction({
+    fn: () => {},
+    checkKey: checkKeyArray(["r", "R",]),
+    preventDefault: false,
+    ctrl: SpecialKeyBehavior.PRESSED,
+  }),
+  createFunction({
+    fn: () => {},
+    checkKey: checkKeyArray(["i", "I",]),
+    preventDefault: false,
+    ctrl: SpecialKeyBehavior.PRESSED,
+    shift: SpecialKeyBehavior.PRESSED,
+  }),
+  createFunction({
+    fn: () => {},
+    checkKey: (k) => k[0] === "F" && !isNaN(Number(k.substr(1))),
+    preventDefault: false,
   })
 ]
 

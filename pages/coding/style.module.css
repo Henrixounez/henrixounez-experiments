@@ -1,3 +1,13 @@
-.codeview * {
-  font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+.monospaced {
+  font-family: monospace, ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New";
+  font-weight: normal;
+  cursor: default;
+  color: #DCDCDC;
+}
+
+.codeview, .codeview * {
+  font-family: monospace, ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New";
+  font-size: 14px;
+  font-weight: normal;
+  cursor: default;
 }
