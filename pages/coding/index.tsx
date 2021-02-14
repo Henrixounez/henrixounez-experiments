@@ -300,6 +300,7 @@ const Editor = observer(() => {
             css={[
               xw`block pr-16 overflow-visible`,
               css`
+                min-width: 100%;
                 width: fit-content;
                 height: fit-content;
               `,
