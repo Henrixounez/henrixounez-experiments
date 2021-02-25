@@ -18,21 +18,36 @@ export function highlightAll(code: HTMLElement, text: string) {
     code.innerHTML = hljs.highlight(EditorStore.language, text).value;
 }
 
-export function cursorPosition() {
+export function cursorPosition(code: HTMLElement) {
   let sel: Selection = document.getSelection();
-  (sel as any).modify("extend", "backward", "documentboundary");
-  let pos = sel.toString().length;
-  if (sel.anchorNode != undefined)
-    sel.collapseToEnd();
-  return pos;
+  return cursorPosition2(code, sel.anchorNode, 0).newPos + sel.anchorOffset;
 }
+
+export function cursorPosition2(el: any, anchorNode: any, curPos: number) {
+  for (let node of el.childNodes) {
+    if (node.nodeType === 3) {
+      if (node === anchorNode) {
+        return {found: true, newPos: curPos};
+      } else {
+        curPos += node.length;
+      }
+    } else {
+      const {found, newPos} = cursorPosition2(node, anchorNode, curPos);
+      curPos = newPos;
+      if (found)
+        return {found: true, newPos: curPos};
+    }
+  }
+  return {found: false, newPos: curPos};
+}
+
 export function selRange(code: HTMLElement) {
   const sel = document.getSelection();
   const lastNode = sel.focusNode;
   const lastOffset = sel.focusOffset;
-  const curPos = cursorPosition();
+  const curPos = cursorPosition(code);
   sel.setPosition(lastNode, lastOffset);
-  const lastPos = cursorPosition();
+  const lastPos = cursorPosition(code);
   _SetCaretAtPosition(code, curPos);
   if (curPos < lastPos) 
     return {curPos, lastPos};
@@ -74,7 +89,7 @@ export function SetCaretAtPosition(el: any, pos: number, ws: WebSocket) {
 }
 
 export function addTextAt(code: HTMLElement, startPos: number, endPos: number, textAdd: string, ws: WebSocket) {
-  const curPos = cursorPosition();
+  const curPos = cursorPosition(code);
   let text = code.textContent;
   text = text.substr(0, startPos) + textAdd + text.substr(endPos);
   highlightAll(code, text);
@@ -88,7 +103,7 @@ export function addTextAt(code: HTMLElement, startPos: number, endPos: number, t
   return text;
 }
 export function delTextAt(code: HTMLElement, startPos: number, endPos: number, ws: WebSocket) {
-  const curPos = cursorPosition();
+  const curPos = cursorPosition(code);
   let text = code.textContent;
   text = text.substr(0, startPos) + text.substr(endPos);
   highlightAll(code, text);
@@ -102,7 +117,7 @@ export function delTextAt(code: HTMLElement, startPos: number, endPos: number, w
   return text;
 }
 export function initText(code: HTMLElement, textAdd: string, ws: WebSocket) {
-  const curPos = cursorPosition();
+  const curPos = cursorPosition(code);
   let text = textAdd;
   highlightAll(code, text);
   if (curPos > text.length) {

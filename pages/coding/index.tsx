@@ -170,7 +170,8 @@ const Editor = observer(() => {
         return;
       }
     }
-    ws.current = new WebSocket(`${process.env.NODE_ENV === 'development' ? 'ws://localhost:8080' : 'wss://henrixounez-api.herokuapp.com'}/coding/connect`);
+    const sessionUrl = "";
+    ws.current = new WebSocket(`${process.env.NODE_ENV === 'development' ? 'ws://localhost:8080' : 'wss://henrixounez-api.herokuapp.com'}/coding/connect/${sessionUrl}`);
     ws.current.onopen = (mess) => {
       EditorStore.setConnected(true);
       console.info('[WS] open');

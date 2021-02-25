@@ -89,7 +89,7 @@ async function pasteKey(e: KeyboardEvent<HTMLElement>, code: HTMLElement, ws: We
 /************************/
 
 function moveCursor(e: KeyboardEvent<HTMLElement>, code: HTMLElement, ws: WebSocket) {
-  const curPos = cursorPosition();
+  const curPos = cursorPosition(code);
   sendToWs(ws, {
     type: 'moveCursor',
     data: {
